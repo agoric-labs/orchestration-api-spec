@@ -1,11 +1,16 @@
 import { Delegation, Redelegation, UnbodingDelegation } from './delegation.js';
-import type { Invitation } from '@agoric/zoe';
-import type {
-  Amount,
-  Brand,
-  Payment,
-  Purse,
-} from '@agoric/ertp/src/types.d.ts';
+
+// XXX these types aren't resolving in this repo
+// import type { Invitation } from '@agoric/zoe';
+// import type { Amount, Brand, Payment, Purse } from '@agoric/ertp';
+
+type Invitation = unknown;
+
+// TODO figure out ERTP requirements
+type Brand = unknown;
+type Amount<T extends 'nat' = 'nat'> = { brand: Brand; value: bigint };
+type Payment = unknown;
+type Purse = unknown;
 
 export type TypeUrl = string;
 export type Denom = string; // ibc/... or uist

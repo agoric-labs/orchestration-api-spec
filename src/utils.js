@@ -1,3 +1,5 @@
+import '@agoric/zoe/exported.js';
+
 /** @type {import('./index').OrcUtils} */
 export const orcUtils = {
   /**

@@ -1,0 +1,9 @@
+{
+  "entryPoints": [
+    "src/index.*"
+  ],
+  "name": "API documentation of Agoric SDK ",
+  "out": "api-docs",
+  "includeVersion": true,
+  "logLevel": "Verbose"
+}
