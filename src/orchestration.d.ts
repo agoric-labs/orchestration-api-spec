@@ -82,7 +82,7 @@ export type CosmosChainInfo = {
 export type ChainInfo = CosmosChainInfo | EthChainInfo;
 
 // marker interface
-interface QueryResult {}
+interface QueryResult { }
 
 export interface Chain {
   getChainInfo: () => Promise<ChainInfo>;
@@ -109,62 +109,144 @@ export interface ChainAccount {
 export type BrandOrDenom = Brand | Denom;
 
 export interface OrchestrationAccount {
+  /** @returns the underlying low-level operation object. */
   getChainAcccount: () => Promise<ChainAccount>;
+  /** @returns an array of amounts for every balance in the account. */
   getBalances: () => Promise<Amount[]>;
+  /** @returns the balance of a specific denom for the account. */
   getBalance: (denom: BrandOrDenom) => Promise<Amount | undefined>;
+
   getDenomTrace: (
     denom: string,
   ) => Promise<{ path: string; base_denom: string }>;
+  /** 
+   * @returns all active delegations from the account to any validator (or [] if none) 
+   */
   getDelegations: () => Promise<Delegation[]>;
+  /** 
+   * @returns the active delegations from the account to a specific validator (or [] if none) 
+   */
   getDelegation: (validator: ValidatorAddress) => Promise<Delegation[]>;
+  /** 
+   * @returns the unbonding delegations from the account to any validator (or [] if none) 
+   */
   getUnbondingDelegations: () => Promise<UnbodingDelegation[]>;
-  getUnbondingDelegation: (
-    validator: ValidatorAddress,
-  ) => Promise<UnbodingDelegation>;
+  /** 
+   * @returns the unbonding delegations from the account to a specific validator (or [] if none) 
+   */
+  getUnbondingDelegation: (validator: ValidatorAddress) => Promise<UnbodingDelegation>;
   getRedelegations: () => Promise<Redelegation[]>;
   getRedelegation: (
     srcValidator: ValidatorAddress,
     dstValidator?: ValidatorAddress,
   ) => Promise<Redelegation>;
+  /** 
+   * Get the pending rewards for the account.
+   * @returns the amounts of the account's rewards pending from all validators 
+   */
   getRewards: () => Promise<Amount[]>;
+  /** 
+   * Get the rewards pending with a specific validator.
+   * @param validator - the validator address to query for  
+   * @returns the amount of the account's rewards pending from a specific validator 
+   */
   getReward: (validator: ValidatorAddress) => Promise<Amount[]>;
-  send: (toAccount: ChainAddress, amount: Amount[]) => Promise<void>;
+  /**
+   * Transfer amount to another account on the same chain. The promise settles when the transfer is complete.
+   * @param toAccount - the account to send the amount to. MUST be on the same chain
+   * @param amount - the amount to send
+   * @returns void
+   */
+  send: (toAccount: ChainAddress, amount: Amount) => Promise<void>;
+  /**
+   * Delegate an amount to a validator. The promise settles when the delegation is complete.
+   * @param validator - the validator to delegate to
+   * @param amount  - the amount to delegate
+   * @returns void
+   */
   delegate: (validator: ValidatorAddress, amount: Amount) => Promise<void>;
+  /**
+   * Redelegate from one delegator to another.
+   * Settles when teh redelegation is established, not 21 days later.
+   * @param srcValidator - the current validator for the delegation.
+   * @param dstValidator - the validator that will receive the delegation.
+   * @param amount - how much to redelegate.
+   * @returns 
+   */
   redelegate: (
     srcValidator: ValidatorAddress,
     dstValidator: ValidatorAddress,
     amount: Amount,
   ) => Promise<void>;
+  /**
+   * Undelegate a delegation. The promise settles when the undelegation is complete.
+   * @param delegation - the delegation to undelegate
+   * @returns void
+   */
   undelegate: (delegation: Delegation) => Promise<void>;
+  /**
+   * Undelegate multiple delegations (concurrently). The promise settles when all the delegations are undelegated.
+   * 
+   * TODO: what if some of the delegations are not possible?
+   * @param delegations 
+   * @returns 
+   */
   undelegateAll: (delegations: Delegation[]) => Promise<void>;
+  /**
+   * Withdraw rewards from all validators. The promise settles when the rewards are withdrawn.
+   * @returns The total amounts of rewards withdrawn
+   */
   withdrawRewards: () => Promise<Amount[]>;
+  /**
+   * Withdraw rewards from a specific validator. The promise settles when the rewards are withdrawn.
+   * @param validator - the validator to withdraw rewards from
+   * @returns 
+   */
   withdrawReward: (validator: ValidatorAddress) => Promise<Amount[]>;
-  transfer: (
-    toAccount: ChainAddress,
-    amount: Amount<'nat'>,
-    memo?: string,
-    timeoutTimestamp?: bigint,
-  ) => Promise<void>;
+  /**
+   * Transfer an amount to another account, typically on another chain. 
+   * The promise settles when the transfer is complete.
+   * @param amount - the amount to transfer.
+   * @param destination - the account to transfer the amount to. 
+   * @param memo - an optional memo to include with the transfer, which could drive custom PFM behavior
+   * @returns void
+   * 
+   * TODO document the mapping from the address to the destination chain.
+   */
+  transfer: (amount: Amount, destination: ChainAddress, memo?: string) => Promise<void>;
+  /**
+   * Transfer an amount to another account in multiple steps. The promise settles when 
+   * the entire path of the transfer is complete.
+   * @param amount - the amount to transfer
+   * @param msg - the transfer message, including follow-up steps
+   * @returns void
+   */
+  transferSteps: (amount: Amount, msg: TransferMsg) => Promise<void>;
 }
 
 export type TransferMsg = {
   toAccount: ChainAddress;
-  amount: Amount<'nat'>;
-  memo?: string;
-  timeoutTimestamp?: bigint;
+  timeout?: Timestamp;
+  next?: TransferMsg;
 };
 
-/** osmosis swap */
-type AfterAction = { destChain: string; destAddress: ChainAddress };
-type SwapExact = { amountIn: Amount; amountOut: Amount };
-type SwapMaxSlippage = { amountIn: Amount; brandOut: Brand; slippage: number };
-// SwapExact or SwapMaxSlippage, with optional AfterAction
-export type OsmosisSwapArgs = (SwapExact | SwapMaxSlippage) &
-  (AfterAction | Record<string, never>);
+// TODO how dp the additinoal argumens get encoded into the PFM message?
 
-/** library that can be imported in a contract, not a vat or contract */
-export type OrcUtils = {
-  /* unwinds denom with PFM, if necessary */
-  makeTransferMsg: (args: Omit<TransferMsg, 'memo'>) => TransferMsg;
-  makeOsmosisSwap: (args: OsmosisSwapArgs) => TransferMsg;
-};
+/**
+ * Make a TransferMsg for a swap operation. 
+ * @param denom - the currency to swap to
+ * @param slippage - the maximum acceptable slippage
+ */
+export type SwapTransferFn = (denom: BrandOrDenom, slippage?: Ratio) => TransferMsg;
+/**
+ * Make a TransferMsg for a sequence of transfer steps.
+ * @param steps - the transfer steps
+ */
+export type SequenceTransferFn = (...steps: TransferMsg[]) => TransferMsg;
+/**
+ * Make a TransferMsg for a simple transfer to a destination account.
+ * @param dest - the destination account
+ */
+export type SimpleTransferFn = (dest: ChainAddress) => TransferMsg;
+
+// TODO use "denom" or "brand" as the parameter for the currency type
