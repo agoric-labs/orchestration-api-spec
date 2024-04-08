@@ -50,11 +50,16 @@ export interface Orchestrator {
   getChain: (chainName: string) => Promise<Chain>;
 }
 
+/**
+ * Info for an Ethereum-based chain.
+ */
 export type EthChainInfo = {
   chainId: string;
   allegedName: string;
 };
-
+/**
+ * Info for a Cosmos-based chain.
+ */
 export type CosmosChainInfo = {
   chainId: string;
   ibcConnectionInfo: {
@@ -84,23 +89,54 @@ export type ChainInfo = CosmosChainInfo | EthChainInfo;
 // marker interface
 interface QueryResult { }
 
+/**
+ * An object for access the core functions of a remote chain.
+ */
 export interface Chain {
   getChainInfo: () => Promise<ChainInfo>;
-  /* create a new ChainAccount Ownable */
+  /**
+   * Provide (get or make) an account on the chain. The account is a 
+   * named account associated with the current orchestrator instance 
+   * (typically associated with a specific seat). If an account for this `Chain`
+   * with the provided `petName` already exists, it is returned, 
+   * otherwise a new account is created on the remote Chain.
+   * @param petName 
+   * @returns the account that controls the 
+   */
   provideAccount: (petName?: string) => Promise<OrchestrationAccount>;
   /* query external chain state */
   query: (queries: Proto3JSONMsg[]) => Promise<Iterable<QueryResult>>;
+
+  // TODO we need a way to have multiple offers get the same orchestrator.
 }
 
+/**
+ * An object that supports low-level queries and operations for an account on a remote chain.
+ */
 export interface ChainAccount {
+  /**
+   * @returns the address of the account on the chain
+   */
   getAddress: () => ChainAddress;
+  /**
+   * Submit a transaction on behalf of the remote accoutn for execution on teh remote chain.
+   * @param msgs - records for the transaction
+   * @returns void
+   */
   executeTx: (msgs: Proto3JSONMsg[]) => Promise<void>;
+  /**
+  * Submit a transaction on behalf of the remote accoutn for execution on teh remote chain.
+  * @param msgs - records for the transaction
+  * @returns void
+  */
   executeEncodedTx: (msgs: EncodeObject[]) => Promise<void>;
   /** deposit payment from zoe to the account*/
   deposit: (payment: Payment) => Promise<void>;
   /** get Purse for a brand to .withdraw() a Payment from the account */
   getPurse: (brand: Brand) => Promise<Purse>;
-  /* close the account */
+  /**
+   * Close the remote account 
+   */
   close: () => Promise<void>;
   /* transfer account to new holder */
   prepareTransfer: () => Promise<Invitation>;
@@ -108,6 +144,9 @@ export interface ChainAccount {
 
 export type BrandOrDenom = Brand | Denom;
 
+/**
+ * An object that supports high-level operations for an account on a remote chain.
+ */
 export interface OrchestrationAccount {
   /** @returns the underlying low-level operation object. */
   getChainAcccount: () => Promise<ChainAccount>;
@@ -248,5 +287,14 @@ export type SequenceTransferFn = (...steps: TransferMsg[]) => TransferMsg;
  * @param dest - the destination account
  */
 export type SimpleTransferFn = (dest: ChainAddress) => TransferMsg;
+
+/**
+ * Examples
+ * ```
+ * const osmoSwap: SwapTransferFn = ...
+ * const steps: SequenceTransferFn = ...
+ * const to: SimpleTransferFn = ...
+ */
+
 
 // TODO use "denom" or "brand" as the parameter for the currency type
