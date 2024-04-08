@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "docs": "typedoc",
+    "format": "prettier --write src",
     "lint": "eslint . --ext ts --report-unused-disable-directives",
     "lint:fix": "yarn lint --fix",
     "test": "ava"
