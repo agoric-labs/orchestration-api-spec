@@ -1,3 +1,5 @@
+import { Timestamp } from '@agoric/time';
+
 import { Delegation, Redelegation, UnbodingDelegation } from './delegation.js';
 
 // XXX these types aren't resolving in this repo
@@ -9,6 +11,7 @@ type Invitation = unknown;
 // TODO figure out ERTP requirements
 type Brand = unknown;
 type Amount<T extends 'nat' = 'nat'> = { brand: Brand; value: bigint };
+type Ratio = { numerator: Amount; denominator: Amount };
 type Payment = unknown;
 type Purse = unknown;
 
