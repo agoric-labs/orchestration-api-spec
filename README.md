@@ -18,9 +18,10 @@ arc/
 
 Download and build the latest copy of `orchestration-api-spec`.
 
-   ```sh
-   yarn install && yarn docs
+```sh
+corepack enable
+yarn install && yarn docs
 
-   ```
+```
 
-Docs will be in `api-docs`. 
+Docs will be in `api-docs`.
