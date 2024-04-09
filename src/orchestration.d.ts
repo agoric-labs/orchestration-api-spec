@@ -1,12 +1,20 @@
 import { Timestamp } from '@agoric/time';
 
-import { Delegation, Redelegation, UnbodingDelegation } from './delegation.js';
+import { Delegation, Redelegation, UnbodingDelegation as UnbondingDelegation } from './delegation.js';
 
 // XXX these types aren't resolving in this repo
 // import type { Invitation } from '@agoric/zoe';
 // import type { Amount, Brand, Payment, Purse } from '@agoric/ertp';
 
 type Invitation = unknown;
+
+export type KnownChains = {
+  // these are all ChainInfo
+  stride: null,
+  cosmos: null,
+  agoric: null,
+  celestia: null,
+};
 
 // TODO figure out ERTP requirements
 type Brand = unknown;
@@ -50,7 +58,7 @@ export interface OrchestrationGovernor {
 
 // chainName: managed like agoricNames. API consumers can make/provide their own
 export interface Orchestrator {
-  getChain: (chainName: string) => Promise<Chain>;
+  getChain: (chainName: keyof KnownChains) => Promise<Chain>;
 }
 
 /**
@@ -83,31 +91,39 @@ export type CosmosChainInfo = {
   icqEnabled: boolean;
   pfmEnabled: boolean;
   ibcHooksEnabled: boolean;
-  allowMessages: TypeUrl[];
-  allowQueries: TypeUrl[];
+  /**
+   * 
+   */
+  allowedMessages: TypeUrl[];
+  allowedQueries: TypeUrl[];
 };
 
 export type ChainInfo = CosmosChainInfo | EthChainInfo;
 
 // marker interface
-interface QueryResult {}
+interface QueryResult { }
 
 /**
  * An object for access the core functions of a remote chain.
  */
 export interface Chain {
   getChainInfo: () => Promise<ChainInfo>;
+
+  // TODO change to `makeAccount`?
+  // FUTURE supply optional port object; also fetch port object
   /**
    * Provide (get or make) an account on the chain. The account is a
    * named account associated with the current orchestrator instance
    * (typically associated with a specific seat). If an account for this `Chain`
-   * with the provided `petName` already exists, it is returned,
+   * with the provided `name` already exists, it is returned,
    * otherwise a new account is created on the remote Chain.
-   * @param petName
-   * @returns the account that controls the
+   * @param name
+   * @returns an object that controls the remote account
    */
-  provideAccount: (petName?: string) => Promise<OrchestrationAccount>;
-  /* query external chain state */
+  provideAccount: (name?: string) => Promise<OrchestrationAccount>;
+  /**
+   * query external chain state 
+   */
   query: (queries: Proto3JSONMsg[]) => Promise<Iterable<QueryResult>>;
 
   // TODO we need a way to have multiple offers get the same orchestrator.
@@ -118,21 +134,21 @@ export interface Chain {
  */
 export interface ChainAccount {
   /**
-   * @returns the address of the account on the chain
+   * @returns the address of the account on the remote chain
    */
   getAddress: () => ChainAddress;
   /**
-   * Submit a transaction on behalf of the remote accoutn for execution on teh remote chain.
+   * Submit a transaction on behalf of the remote account for execution on the remote chain.
    * @param msgs - records for the transaction
-   * @returns void
+   * @returns acknowledgement string
    */
-  executeTx: (msgs: Proto3JSONMsg[]) => Promise<void>;
+  executeTx: (msgs: Proto3JSONMsg[]) => Promise<string>;
   /**
-   * Submit a transaction on behalf of the remote accoutn for execution on teh remote chain.
+   * Submit a transaction on behalf of the remote account for execution on the remote chain.
    * @param msgs - records for the transaction
-   * @returns void
+   * @returns acknowledge string
    */
-  executeEncodedTx: (msgs: EncodeObject[]) => Promise<void>;
+  executeEncodedTx: (msgs: EncodeObject[]) => Promise<string>;
   /** deposit payment from zoe to the account*/
   deposit: (payment: Payment) => Promise<void>;
   /** get Purse for a brand to .withdraw() a Payment from the account */
@@ -166,19 +182,20 @@ export interface OrchestrationAccount {
    */
   getDelegations: () => Promise<Delegation[]>;
   /**
-   * @returns the active delegations from the account to a specific validator (or [] if none)
+   * @returns the active delegation from the account to a specific validator. Return an 
+   * empty Delegation if there is no delegation.
+   * 
+   * TODO what does it return if there's no delegation?
    */
-  getDelegation: (validator: ValidatorAddress) => Promise<Delegation[]>;
+  getDelegation: (validator: ValidatorAddress) => Promise<Delegation>;
   /**
    * @returns the unbonding delegations from the account to any validator (or [] if none)
    */
-  getUnbondingDelegations: () => Promise<UnbodingDelegation[]>;
+  getUnbondingDelegations: () => Promise<UnbondingDelegation[]>;
   /**
    * @returns the unbonding delegations from the account to a specific validator (or [] if none)
    */
-  getUnbondingDelegation: (
-    validator: ValidatorAddress,
-  ) => Promise<UnbodingDelegation>;
+  getUnbondingDelegation: (validator: ValidatorAddress) => Promise<UnbondingDelegation>;
   getRedelegations: () => Promise<Redelegation[]>;
   getRedelegation: (
     srcValidator: ValidatorAddress,
@@ -231,7 +248,7 @@ export interface OrchestrationAccount {
   /**
    * Undelegate multiple delegations (concurrently). The promise settles when all the delegations are undelegated.
    *
-   * TODO: what if some of the delegations are not possible?
+   * TODO: document error behavior in case some unbondings fail
    * @param delegations
    * @returns
    */
@@ -270,15 +287,17 @@ export interface OrchestrationAccount {
    * @returns void
    */
   transferSteps: (amount: Amount, msg: TransferMsg) => Promise<void>;
+
 }
+
+// TODO simplify the TransferMsg composition
 
 export type TransferMsg = {
   toAccount: ChainAddress;
   timeout?: Timestamp;
   next?: TransferMsg;
+  data?: object;
 };
-
-// TODO how dp the additinoal argumens get encoded into the PFM message?
 
 /**
  * Make a TransferMsg for a swap operation.
@@ -309,3 +328,6 @@ export type SimpleTransferFn = (dest: ChainAddress) => TransferMsg;
  */
 
 // TODO use "denom" or "brand" as the parameter for the currency type
+
+// TODO make it easy to extend /stride.stakeibc.MsgLiquidStake - turadg
+//     so I can do `orch.getChain('stride').makeAccount().liquidStake(amount)`
