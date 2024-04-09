@@ -1,6 +1,6 @@
-import type { Coin } from "@cosmjs/amino";
-import type { TimestampRecord } from "@agoric/time";
-import type { ChainAddress } from "./index.js";
+import type { Coin } from '@cosmjs/amino';
+import type { TimestampRecord } from '@agoric/time';
+import type { ChainAddress } from './orchestration.js';
 
 export type Delegation = {
   delegation: {
