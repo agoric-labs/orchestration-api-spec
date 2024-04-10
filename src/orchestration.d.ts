@@ -61,6 +61,14 @@ export interface Orchestrator {
   getChain: (chainName: keyof KnownChains) => Promise<Chain>;
 }
 
+// orchestrate('LSTTia', { zcf }, async (orch, { zcf }, seat, offerArgs) => {...})
+// export type OrchestrationHandlerMaker<Context> = 
+export type OrchestrationHandlerMaker =
+  (durableName: string,
+    ctx: Context,
+    fn: (Orchestrator, object, ...args) => object,
+  ) => ((...args) => object);
+
 /**
  * Info for an Ethereum-based chain.
  */
@@ -105,22 +113,21 @@ interface QueryResult { }
 
 /**
  * An object for access the core functions of a remote chain.
+ * 
+ * Note that "remote" can mean the agoric chain; it's just that 
+ * accounts are treated as remote/arms length for consistency.
  */
 export interface Chain {
   getChainInfo: () => Promise<ChainInfo>;
 
-  // TODO change to `makeAccount`?
-  // FUTURE supply optional port object; also fetch port object
   /**
-   * Provide (get or make) an account on the chain. The account is a
-   * named account associated with the current orchestrator instance
-   * (typically associated with a specific seat). If an account for this `Chain`
-   * with the provided `name` already exists, it is returned,
-   * otherwise a new account is created on the remote Chain.
-   * @param name
-   * @returns an object that controls the remote account
+   * Make a new account on the remote chain. 
+   * @param name - account name for logging and tracing purposes
+   * @returns an object that controls a new remote account on Chain
    */
-  provideAccount: (name?: string) => Promise<OrchestrationAccount>;
+  makeAccount: (name?: string) => Promise<OrchestrationAccount>;
+  // FUTURE supply optional port object; also fetch port object
+
   /**
    * query external chain state 
    */
@@ -169,10 +176,14 @@ export type BrandOrDenom = Brand | Denom;
 export interface OrchestrationAccount {
   /** @returns the underlying low-level operation object. */
   getChainAcccount: () => Promise<ChainAccount>;
+  /**
+   * @returns the address of the account on the remote chain
+   */
+  getAddress: () => ChainAddress;
   /** @returns an array of amounts for every balance in the account. */
   getBalances: () => Promise<Amount[]>;
   /** @returns the balance of a specific denom for the account. */
-  getBalance: (denom: BrandOrDenom) => Promise<Amount | undefined>;
+  getBalance: (denom: BrandOrDenom) => Promise<Amount>;
 
   getDenomTrace: (
     denom: string,

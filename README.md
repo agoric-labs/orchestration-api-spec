@@ -12,7 +12,9 @@ For early comment on the Orchestration API
 
 ### Key files
 
-arc/
+src/orchestration.d.ts
+src/delegation.d.ts
+src/contract.js
 
 ### Setup
 
