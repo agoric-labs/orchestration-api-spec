@@ -2,12 +2,20 @@ import { Timestamp } from '@agoric/time';
 
 import { Delegation, Redelegation, UnbodingDelegation as UnbondingDelegation } from './delegation.js';
 
-// XXX these types aren't resolving in this repo
+// XXX these types aren't resolving in this repo; these are placeholders
 // import type { Invitation } from '@agoric/zoe';
 // import type { Amount, Brand, Payment, Purse } from '@agoric/ertp';
-
 type Invitation = unknown;
+type Brand = unknown;
+type Amount<T extends 'nat' = 'nat'> = { brand: Brand; value: bigint };
+type Ratio = { numerator: Amount; denominator: Amount };
+type Payment = unknown;
+type Purse = unknown;
 
+
+/** static declaration of known chain types will allow type support for 
+ * additional chain-specific operations like `liquidStake`
+ */
 export type KnownChains = {
   // these are all ChainInfo
   stride: null,
@@ -15,13 +23,6 @@ export type KnownChains = {
   agoric: null,
   celestia: null,
 };
-
-// TODO figure out ERTP requirements
-type Brand = unknown;
-type Amount<T extends 'nat' = 'nat'> = { brand: Brand; value: bigint };
-type Ratio = { numerator: Amount; denominator: Amount };
-type Payment = unknown;
-type Purse = unknown;
 
 export type TypeUrl = string;
 export type Denom = string; // ibc/... or uist
@@ -65,7 +66,7 @@ export interface Orchestrator {
 // export type OrchestrationHandlerMaker<Context> = 
 export type OrchestrationHandlerMaker =
   (durableName: string,
-    ctx: Context,
+    ctx: object,
     fn: (Orchestrator, object, ...args) => object,
   ) => ((...args) => object);
 

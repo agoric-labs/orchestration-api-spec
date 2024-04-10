@@ -12,9 +12,9 @@ For early comment on the Orchestration API
 
 ### Key files
 
-src/orchestration.d.ts
-src/delegation.d.ts
-src/contract.js
+* src/orchestration.d.ts
+* src/delegation.d.ts
+* src/contract.js
 
 ### Setup
 
