@@ -26,9 +26,9 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@agoric/ertp": "0.16.3-u14.0",
+    "@agoric/ertp": "0.16.3-dev-00cccfc.0",
     "@agoric/time": "0.3.3-u14.0",
-    "@agoric/zoe": "0.26.3-u14.0",
+    "@agoric/zoe": "0.26.3-dev-00cccfc.0",
     "@cosmjs/amino": "^0.32.2",
     "@cosmjs/proto-signing": "^0.32.2",
     "@cosmjs/stargate": "^0.32.2",

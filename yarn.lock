@@ -12,6 +12,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@agoric/assert@npm:0.6.1-dev-00cccfc.0+00cccfc":
+  version: 0.6.1-dev-00cccfc.0
+  resolution: "@agoric/assert@npm:0.6.1-dev-00cccfc.0"
+  checksum: 10c0/8a8cb75c8316625b6dcdb6d436ac9d0b2c8fb98bfa88efe0800c5bf3620151cdc9618002013621983e40babda1b9696680a01010edcea2323e1c91a8c0b20626
+  languageName: node
+  linkType: hard
+
 "@agoric/assert@npm:^0.6.1-u11wf.0":
   version: 0.6.1-u11wf.0
   resolution: "@agoric/assert@npm:0.6.1-u11wf.0"
@@ -19,7 +26,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@agoric/babel-generator@npm:^7.17.4, @agoric/babel-generator@npm:^7.17.6":
+"@agoric/babel-generator@npm:^7.17.6":
   version: 7.17.6
   resolution: "@agoric/babel-generator@npm:7.17.6"
   dependencies:
@@ -30,54 +37,93 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@agoric/ertp@npm:0.16.3-u14.0, @agoric/ertp@npm:^0.16.3-u14.0":
-  version: 0.16.3-u14.0
-  resolution: "@agoric/ertp@npm:0.16.3-u14.0"
+"@agoric/base-zone@npm:0.1.1-dev-00cccfc.0+00cccfc":
+  version: 0.1.1-dev-00cccfc.0
+  resolution: "@agoric/base-zone@npm:0.1.1-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/notifier": "npm:^0.6.3-u14.0"
-    "@agoric/store": "npm:^0.9.3-u14.0"
-    "@agoric/swingset-vat": "npm:^0.32.3-u14.0"
-    "@agoric/vat-data": "npm:^0.5.3-u14.0"
-    "@endo/eventual-send": "npm:0.17.2"
-    "@endo/far": "npm:0.2.18"
-    "@endo/marshal": "npm:0.8.5"
-    "@endo/nat": "npm:4.1.27"
-    "@endo/promise-kit": "npm:0.2.56"
-  checksum: 10c0/fd9683f6bf64f539935b5ee144edf9ebf481891a19eeb282573c4c038dcab47c5902f425383cb3d3ef997f99d07e160a2acbf47debe2ef10b042e94e22023239
+    "@agoric/store": "npm:0.9.3-dev-00cccfc.0+00cccfc"
+    "@endo/common": "npm:^1.2.1"
+    "@endo/exo": "npm:^1.4.0"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/pass-style": "npm:^1.3.1"
+    "@endo/patterns": "npm:^1.3.1"
+  checksum: 10c0/4f684eca9453a5776f36c9ceb60d1c84afe3c0f385cfbbb82c820e36f22e26197ceb0f864b4d4f2778cd9407c530f9e7828925a6380ecd509c04c222fbf520e2
   languageName: node
   linkType: hard
 
-"@agoric/internal@npm:^0.4.0-u14.0":
-  version: 0.4.0-u14.0
-  resolution: "@agoric/internal@npm:0.4.0-u14.0"
+"@agoric/ertp@npm:0.16.3-dev-00cccfc.0, @agoric/ertp@npm:0.16.3-dev-00cccfc.0+00cccfc":
+  version: 0.16.3-dev-00cccfc.0
+  resolution: "@agoric/ertp@npm:0.16.3-dev-00cccfc.0"
   dependencies:
-    "@agoric/zone": "npm:^0.2.3-u14.0"
-    "@endo/far": "npm:0.2.18"
-    "@endo/marshal": "npm:0.8.5"
-    "@endo/patterns": "npm:0.2.2"
-    "@endo/promise-kit": "npm:0.2.56"
-    "@endo/stream": "npm:0.3.25"
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/notifier": "npm:0.6.3-dev-00cccfc.0+00cccfc"
+    "@agoric/store": "npm:0.9.3-dev-00cccfc.0+00cccfc"
+    "@agoric/vat-data": "npm:0.5.3-dev-00cccfc.0+00cccfc"
+    "@agoric/zone": "npm:0.2.3-dev-00cccfc.0+00cccfc"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/nat": "npm:^5.0.6"
+    "@endo/patterns": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/3339425b7aa26b83f9d75920c1d3364abcf2215bff3a87438506e8f620a8cb3feb70c60244aaa78c060baa5e7aa445635d7e710b6f332cbd4e0471deb5d08599
+  languageName: node
+  linkType: hard
+
+"@agoric/internal@npm:0.3.3-dev-00cccfc.0+00cccfc":
+  version: 0.3.3-dev-00cccfc.0
+  resolution: "@agoric/internal@npm:0.3.3-dev-00cccfc.0"
+  dependencies:
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/base-zone": "npm:0.1.1-dev-00cccfc.0+00cccfc"
+    "@endo/common": "npm:^1.2.1"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/init": "npm:^1.1.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/patterns": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+    "@endo/stream": "npm:^1.2.1"
     anylogger: "npm:^0.21.0"
-    jessie.js: "npm:^0.3.2"
-  checksum: 10c0/7f6ecaecdd488d548536e52d09a87aec898575096e5025b1dfa108e345a318828e0a93ce4fedac8173e6a988e06aa7545bef313bce06d626c51a38c207ea76c2
+    jessie.js: "npm:^0.3.4"
+  checksum: 10c0/c5d953d6b4195ecff56aa949a549748efc132ef0c4727ceeef2dc93fa45ccdc19382d1366df38a77f4b6f5b901ffa01b5932d07e1c600b4b25f37b3b9f17be96
   languageName: node
   linkType: hard
 
-"@agoric/notifier@npm:^0.6.3-u14.0":
-  version: 0.6.3-u14.0
-  resolution: "@agoric/notifier@npm:0.6.3-u14.0"
+"@agoric/kmarshal@npm:0.1.1-dev-00cccfc.0+00cccfc":
+  version: 0.1.1-dev-00cccfc.0
+  resolution: "@agoric/kmarshal@npm:0.1.1-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/internal": "npm:^0.4.0-u14.0"
-    "@agoric/store": "npm:^0.9.3-u14.0"
-    "@agoric/swing-store": "npm:^0.9.2-u14.0"
-    "@agoric/swingset-vat": "npm:^0.32.3-u14.0"
-    "@agoric/vat-data": "npm:^0.5.3-u14.0"
-    "@endo/far": "npm:0.2.18"
-    "@endo/marshal": "npm:0.8.5"
-    "@endo/promise-kit": "npm:0.2.56"
-  checksum: 10c0/55869104b0ff17a387f00dded01f94e1b7cfbecf45604eef75c2126eb6c3e68881092b8c413ae56fcff98d2260fb5b6e59a7b8256590673e624cb6333d528d14
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/marshal": "npm:^1.4.1"
+  checksum: 10c0/a30ee9490f96accebf6a185f78a0983303acb744db34fc81ac0d5c25b973459c7ef1476d8e480b344bd3b9a8cd25032b399976bcc5cf7901a2af6655d0f02cd2
+  languageName: node
+  linkType: hard
+
+"@agoric/notifier@npm:0.6.3-dev-00cccfc.0+00cccfc":
+  version: 0.6.3-dev-00cccfc.0
+  resolution: "@agoric/notifier@npm:0.6.3-dev-00cccfc.0"
+  dependencies:
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/internal": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/vat-data": "npm:0.5.3-dev-00cccfc.0+00cccfc"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/patterns": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/3fe89c611ab403320d9c854036b7dd803ab01e1610590923e7ed4968f0064af5e3eb2e566b56fb0b7805fc9cea20276f166a4b278a048238fe8210d118dfb1da
+  languageName: node
+  linkType: hard
+
+"@agoric/store@npm:0.9.3-dev-00cccfc.0+00cccfc":
+  version: 0.9.3-dev-00cccfc.0
+  resolution: "@agoric/store@npm:0.9.3-dev-00cccfc.0"
+  dependencies:
+    "@endo/exo": "npm:^1.4.0"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/pass-style": "npm:^1.3.1"
+    "@endo/patterns": "npm:^1.3.1"
+  checksum: 10c0/efe94cedaba6334f5528f0012346db5f2e1163e844b448c991b9c50ce75a247cbc4b6b962beadb3af47c92c15b0c9067532c0ad55dab20518eca27e988463359
   languageName: node
   linkType: hard
 
@@ -94,92 +140,109 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@agoric/swing-store@npm:^0.9.2-u14.0":
-  version: 0.9.2-u14.0
-  resolution: "@agoric/swing-store@npm:0.9.2-u14.0"
+"@agoric/swing-store@npm:0.9.2-dev-00cccfc.0+00cccfc":
+  version: 0.9.2-dev-00cccfc.0
+  resolution: "@agoric/swing-store@npm:0.9.2-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/internal": "npm:^0.4.0-u14.0"
-    "@endo/base64": "npm:0.2.31"
-    "@endo/bundle-source": "npm:2.5.2-upstream-rollup"
-    "@endo/check-bundle": "npm:0.2.18"
-    "@endo/nat": "npm:4.1.27"
-    better-sqlite3: "npm:^8.2.0"
-  checksum: 10c0/e9514a0d1f95bb7bbc1df40a202d5476e22ab8afb51effb60886d4dd3db59cfbc6562f7088f13800408322de984c267227e5f75caa35a91ae7e8156f3a211987
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/internal": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@endo/base64": "npm:^1.0.4"
+    "@endo/bundle-source": "npm:^3.2.2"
+    "@endo/check-bundle": "npm:^1.0.6"
+    "@endo/nat": "npm:^5.0.6"
+    better-sqlite3: "npm:^9.1.1"
+  checksum: 10c0/fffb46b3d3c368fa7fe622a4cce2057f63270858bc133e4b0a9ce8c7b9c632f492e50bd3d20eb58a7ac78c334edfb0947d449bae15f7f235ed23a89686736210
   languageName: node
   linkType: hard
 
-"@agoric/swingset-liveslots@npm:^0.10.3-u14.0":
-  version: 0.10.3-u14.0
-  resolution: "@agoric/swingset-liveslots@npm:0.10.3-u14.0"
+"@agoric/swingset-liveslots@npm:0.10.3-dev-00cccfc.0+00cccfc":
+  version: 0.10.3-dev-00cccfc.0
+  resolution: "@agoric/swingset-liveslots@npm:0.10.3-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/internal": "npm:^0.4.0-u14.0"
-    "@agoric/store": "npm:^0.9.3-u14.0"
-    "@agoric/vat-data": "npm:^0.5.3-u14.0"
-    "@endo/eventual-send": "npm:0.17.2"
-    "@endo/exo": "npm:0.2.2"
-    "@endo/far": "npm:0.2.18"
-    "@endo/init": "npm:0.5.56"
-    "@endo/marshal": "npm:0.8.5"
-    "@endo/nat": "npm:4.1.27"
-    "@endo/pass-style": "npm:0.1.3"
-    "@endo/patterns": "npm:0.2.2"
-    "@endo/promise-kit": "npm:0.2.56"
-  checksum: 10c0/ecfddebb53987453e44db361eede5ced4c486edc57425673300536c21451538bd34a3c85d1a7e3040197c03ca8140ae7c68094b514370ae4fe6b81d8477552f1
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/internal": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/store": "npm:0.9.3-dev-00cccfc.0+00cccfc"
+    "@endo/env-options": "npm:^1.1.3"
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/exo": "npm:^1.4.0"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/init": "npm:^1.1.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/nat": "npm:^5.0.6"
+    "@endo/pass-style": "npm:^1.3.1"
+    "@endo/patterns": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/6032b0699dfcdbe17e4c771a6d92ecc33e06aec97916d99c7f78ce41b8cab138bf552e581d4cb759840019848aea20f02a95d7bc156ce6fdc02fe5561f539620
   languageName: node
   linkType: hard
 
-"@agoric/swingset-vat@npm:^0.32.3-u14.0":
-  version: 0.32.3-u14.0
-  resolution: "@agoric/swingset-vat@npm:0.32.3-u14.0"
+"@agoric/swingset-vat@npm:0.32.3-dev-00cccfc.0+00cccfc":
+  version: 0.32.3-dev-00cccfc.0
+  resolution: "@agoric/swingset-vat@npm:0.32.3-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/internal": "npm:^0.4.0-u14.0"
-    "@agoric/store": "npm:^0.9.3-u14.0"
-    "@agoric/swing-store": "npm:^0.9.2-u14.0"
-    "@agoric/swingset-liveslots": "npm:^0.10.3-u14.0"
-    "@agoric/swingset-xsnap-supervisor": "npm:^0.10.3-u14.0"
-    "@agoric/time": "npm:^0.3.3-u14.0"
-    "@agoric/vat-data": "npm:^0.5.3-u14.0"
-    "@agoric/xsnap": "npm:^0.14.3-u14.0"
-    "@agoric/xsnap-lockdown": "npm:^0.14.1-u13.0"
-    "@endo/base64": "npm:0.2.31"
-    "@endo/bundle-source": "npm:2.5.2-upstream-rollup"
-    "@endo/captp": "npm:3.1.1"
-    "@endo/check-bundle": "npm:0.2.18"
-    "@endo/compartment-mapper": "npm:0.8.4"
-    "@endo/eventual-send": "npm:0.17.2"
-    "@endo/far": "npm:0.2.18"
-    "@endo/import-bundle": "npm:0.3.4"
-    "@endo/init": "npm:0.5.56"
-    "@endo/marshal": "npm:0.8.5"
-    "@endo/nat": "npm:4.1.27"
-    "@endo/promise-kit": "npm:0.2.56"
-    "@endo/ses-ava": "npm:0.2.40"
-    "@endo/zip": "npm:0.2.31"
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/internal": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/kmarshal": "npm:0.1.1-dev-00cccfc.0+00cccfc"
+    "@agoric/store": "npm:0.9.3-dev-00cccfc.0+00cccfc"
+    "@agoric/swing-store": "npm:0.9.2-dev-00cccfc.0+00cccfc"
+    "@agoric/swingset-liveslots": "npm:0.10.3-dev-00cccfc.0+00cccfc"
+    "@agoric/swingset-xsnap-supervisor": "npm:0.10.3-dev-00cccfc.0+00cccfc"
+    "@agoric/time": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/vat-data": "npm:0.5.3-dev-00cccfc.0+00cccfc"
+    "@agoric/xsnap": "npm:0.14.3-dev-00cccfc.0+00cccfc"
+    "@agoric/xsnap-lockdown": "npm:0.14.1-dev-00cccfc.0+00cccfc"
+    "@endo/base64": "npm:^1.0.4"
+    "@endo/bundle-source": "npm:^3.2.2"
+    "@endo/captp": "npm:^4.1.1"
+    "@endo/check-bundle": "npm:^1.0.6"
+    "@endo/compartment-mapper": "npm:^1.1.4"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/import-bundle": "npm:^1.1.1"
+    "@endo/init": "npm:^1.1.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/nat": "npm:^5.0.6"
+    "@endo/patterns": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+    "@endo/ses-ava": "npm:^1.2.1"
+    "@endo/stream": "npm:^1.2.1"
+    "@endo/zip": "npm:^1.0.4"
     ansi-styles: "npm:^6.2.1"
     anylogger: "npm:^0.21.0"
+    better-sqlite3: "npm:^9.1.1"
     import-meta-resolve: "npm:^2.2.1"
     microtime: "npm:^3.1.0"
     semver: "npm:^6.3.0"
     tmp: "npm:^0.2.1"
+    yargs-parser: "npm:^21.1.1"
   peerDependencies:
-    ava: ^5.2.0
+    ava: ^5.3.0
   bin:
     vat: bin/vat
-  checksum: 10c0/8c75cab17d8352e49f14f9865ffa696e8d856474b8ec878ed2e464d74bc0002026f72e7ce8149f921eba0db17f99676588ce952d6f58a8c92971c5b969a41d24
+  checksum: 10c0/377a37d8fc4bc4deef1be93cb22de0c825fc974d9357795ea4170e9df4cfe1fab2a4da78d3f2545b387558bd00e5be9d0e637b5e6fa21d1b43903f943dc9d322
   languageName: node
   linkType: hard
 
-"@agoric/swingset-xsnap-supervisor@npm:^0.10.3-u14.0":
-  version: 0.10.3-u14.0
-  resolution: "@agoric/swingset-xsnap-supervisor@npm:0.10.3-u14.0"
-  checksum: 10c0/37412f9a6fc305b5f1e1798d206956f941ecda666d7ba609b209430caadfa3ac543e6c7e5dd5fdd08691ecad93889148755eed44beca0f670b34e6f8b89a52a0
+"@agoric/swingset-xsnap-supervisor@npm:0.10.3-dev-00cccfc.0+00cccfc":
+  version: 0.10.3-dev-00cccfc.0
+  resolution: "@agoric/swingset-xsnap-supervisor@npm:0.10.3-dev-00cccfc.0"
+  checksum: 10c0/9ab085a60123ae936a4685883d9f9bc225aa7c221065d7da7675f50c9fe8bb59f17f0b9394507e115479e8947d4689169c9c9b6fa1b6d6b0c47a293fa0369e89
   languageName: node
   linkType: hard
 
-"@agoric/time@npm:0.3.3-u14.0, @agoric/time@npm:^0.3.3-u14.0":
+"@agoric/time@npm:0.3.3-dev-00cccfc.0+00cccfc":
+  version: 0.3.3-dev-00cccfc.0
+  resolution: "@agoric/time@npm:0.3.3-dev-00cccfc.0"
+  dependencies:
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@endo/nat": "npm:^5.0.6"
+    "@endo/patterns": "npm:^1.3.1"
+  checksum: 10c0/102eb1a9a115814b803a956ffa1ad0a059b6c07d5858b1e5bb1e75254d70a0b7644215986b251e39577e89db6f5c52d6352469682690cc2a7c68e73ff57613da
+  languageName: node
+  linkType: hard
+
+"@agoric/time@npm:0.3.3-u14.0":
   version: 0.3.3-u14.0
   resolution: "@agoric/time@npm:0.3.3-u14.0"
   dependencies:
@@ -190,80 +253,106 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@agoric/vat-data@npm:^0.5.3-u14.0":
-  version: 0.5.3-u14.0
-  resolution: "@agoric/vat-data@npm:0.5.3-u14.0"
+"@agoric/vat-data@npm:0.5.3-dev-00cccfc.0+00cccfc":
+  version: 0.5.3-dev-00cccfc.0
+  resolution: "@agoric/vat-data@npm:0.5.3-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/internal": "npm:^0.4.0-u14.0"
-    "@agoric/store": "npm:^0.9.3-u14.0"
-  checksum: 10c0/0598fd4af197313205f889193301b7b545bee98412a2a2eae0cdad502d9195e32d430b6a37431b6bdd292cfffc18780af1dfe74cccd750b749d3f068d2f955ee
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/base-zone": "npm:0.1.1-dev-00cccfc.0+00cccfc"
+    "@agoric/internal": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/store": "npm:0.9.3-dev-00cccfc.0+00cccfc"
+    "@agoric/swingset-liveslots": "npm:0.10.3-dev-00cccfc.0+00cccfc"
+    "@agoric/vow": "npm:0.1.1-dev-00cccfc.0+00cccfc"
+    "@endo/exo": "npm:^1.4.0"
+    "@endo/patterns": "npm:^1.3.1"
+  checksum: 10c0/6cebe7d5c82512efc57139d0d6cddd392eb5e73f1c1284c0ea0ad5ef4fd8311ecdd2b6f7fdd0aeb84dafb64ae427f6953124d6a265970e368430570ab2076633
   languageName: node
   linkType: hard
 
-"@agoric/xsnap-lockdown@npm:^0.14.1-u13.0":
-  version: 0.14.1-u13.0
-  resolution: "@agoric/xsnap-lockdown@npm:0.14.1-u13.0"
-  checksum: 10c0/91a20c010727144f2b150357d9b8491795cd296419b27c862738e31bb4d5ae22049af5f3fdacf4f4070a407e4fb6a653f0e265499dce8ecd5f898a12f924a0fa
+"@agoric/vow@npm:0.1.1-dev-00cccfc.0+00cccfc":
+  version: 0.1.1-dev-00cccfc.0
+  resolution: "@agoric/vow@npm:0.1.1-dev-00cccfc.0"
+  dependencies:
+    "@agoric/base-zone": "npm:0.1.1-dev-00cccfc.0+00cccfc"
+    "@endo/env-options": "npm:^1.1.3"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/pass-style": "npm:^1.3.1"
+    "@endo/patterns": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/17bd470e1641ee82bd950c608b191d205f83be99d3d518f90c71942d826405ea835a0cfdbfbc7dbeabf6a933a480673ed15d563d2ab0f77b977a772021c3e481
   languageName: node
   linkType: hard
 
-"@agoric/xsnap@npm:^0.14.3-u14.0":
-  version: 0.14.3-u14.0
-  resolution: "@agoric/xsnap@npm:0.14.3-u14.0"
+"@agoric/xsnap-lockdown@npm:0.14.1-dev-00cccfc.0+00cccfc":
+  version: 0.14.1-dev-00cccfc.0
+  resolution: "@agoric/xsnap-lockdown@npm:0.14.1-dev-00cccfc.0"
+  checksum: 10c0/6e4dc3ec05b522c0fb23758bf320ab45bea0462a8d002e9918049cd728bc82539fc14588ad286bdd69930526d3b1bf351bcd92da16fb89be42a9421c3ba587bb
+  languageName: node
+  linkType: hard
+
+"@agoric/xsnap@npm:0.14.3-dev-00cccfc.0+00cccfc":
+  version: 0.14.3-dev-00cccfc.0
+  resolution: "@agoric/xsnap@npm:0.14.3-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/internal": "npm:^0.4.0-u14.0"
-    "@agoric/xsnap-lockdown": "npm:^0.14.1-u13.0"
-    "@endo/bundle-source": "npm:2.5.2-upstream-rollup"
-    "@endo/eventual-send": "npm:0.17.2"
-    "@endo/init": "npm:0.5.56"
-    "@endo/netstring": "npm:0.3.26"
-    "@endo/promise-kit": "npm:0.2.56"
-    "@endo/stream": "npm:0.3.25"
-    "@endo/stream-node": "npm:0.2.26"
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/internal": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/xsnap-lockdown": "npm:0.14.1-dev-00cccfc.0+00cccfc"
+    "@endo/bundle-source": "npm:^3.2.2"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/init": "npm:^1.1.1"
+    "@endo/netstring": "npm:^1.0.6"
+    "@endo/promise-kit": "npm:^1.1.1"
+    "@endo/stream": "npm:^1.2.1"
+    "@endo/stream-node": "npm:^1.1.1"
     glob: "npm:^7.1.6"
     tmp: "npm:^0.2.1"
   bin:
     ava-xs: src/ava-xs.js
     xsrepl: src/xsrepl
-  checksum: 10c0/32cca9a8981621ba265fcf3f13479526ddc946969d86bf0397efb35e7c6de67ce1afe4dea58b521519f679af2f6a07d427baf5939f465b70efc012bc6b46b3e6
+  checksum: 10c0/377ceabd417873b4c99f9eefd5cbb81003b1a3e152b8bed2984581858810b156c42326df619d4bb106d83d08f35796da69c7389ff85fd110ebcd43bceed3b35a
   languageName: node
   linkType: hard
 
-"@agoric/zoe@npm:0.26.3-u14.0":
-  version: 0.26.3-u14.0
-  resolution: "@agoric/zoe@npm:0.26.3-u14.0"
+"@agoric/zoe@npm:0.26.3-dev-00cccfc.0":
+  version: 0.26.3-dev-00cccfc.0
+  resolution: "@agoric/zoe@npm:0.26.3-dev-00cccfc.0"
   dependencies:
-    "@agoric/assert": "npm:^0.6.1-u11wf.0"
-    "@agoric/ertp": "npm:^0.16.3-u14.0"
-    "@agoric/internal": "npm:^0.4.0-u14.0"
-    "@agoric/notifier": "npm:^0.6.3-u14.0"
-    "@agoric/store": "npm:^0.9.3-u14.0"
-    "@agoric/swingset-vat": "npm:^0.32.3-u14.0"
-    "@agoric/time": "npm:^0.3.3-u14.0"
-    "@agoric/vat-data": "npm:^0.5.3-u14.0"
-    "@endo/bundle-source": "npm:2.5.2-upstream-rollup"
-    "@endo/captp": "npm:3.1.1"
-    "@endo/eventual-send": "npm:0.17.2"
-    "@endo/far": "npm:0.2.18"
-    "@endo/import-bundle": "npm:0.3.4"
-    "@endo/marshal": "npm:0.8.5"
-    "@endo/nat": "npm:4.1.27"
-    "@endo/patterns": "npm:0.2.2"
-    "@endo/promise-kit": "npm:0.2.56"
-  checksum: 10c0/bedfe6977a2b7e119389ed548721bb41669049becf6b2987f1cec1dc919bba089a9071e31b689243d27614eae7c7e52f85c4e2dd48686568f9e37a19ddb21653
+    "@agoric/assert": "npm:0.6.1-dev-00cccfc.0+00cccfc"
+    "@agoric/base-zone": "npm:0.1.1-dev-00cccfc.0+00cccfc"
+    "@agoric/ertp": "npm:0.16.3-dev-00cccfc.0+00cccfc"
+    "@agoric/internal": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/notifier": "npm:0.6.3-dev-00cccfc.0+00cccfc"
+    "@agoric/store": "npm:0.9.3-dev-00cccfc.0+00cccfc"
+    "@agoric/swingset-liveslots": "npm:0.10.3-dev-00cccfc.0+00cccfc"
+    "@agoric/swingset-vat": "npm:0.32.3-dev-00cccfc.0+00cccfc"
+    "@agoric/time": "npm:0.3.3-dev-00cccfc.0+00cccfc"
+    "@agoric/vat-data": "npm:0.5.3-dev-00cccfc.0+00cccfc"
+    "@agoric/zone": "npm:0.2.3-dev-00cccfc.0+00cccfc"
+    "@endo/bundle-source": "npm:^3.2.2"
+    "@endo/captp": "npm:^4.1.1"
+    "@endo/common": "npm:^1.2.1"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/exo": "npm:^1.4.0"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/import-bundle": "npm:^1.1.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/nat": "npm:^5.0.6"
+    "@endo/patterns": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+    yargs-parser: "npm:^21.1.1"
+  checksum: 10c0/af005dcbbaddbb7d850ae2cd1d0b83c57a8bebd497b45edcf99e2ab220f102e00816f163ec92a012a4d7f6b109d30f91b48eae1aeda3776acaaea88103e4a07e
   languageName: node
   linkType: hard
 
-"@agoric/zone@npm:^0.2.3-u14.0":
-  version: 0.2.3-u14.0
-  resolution: "@agoric/zone@npm:0.2.3-u14.0"
+"@agoric/zone@npm:0.2.3-dev-00cccfc.0+00cccfc":
+  version: 0.2.3-dev-00cccfc.0
+  resolution: "@agoric/zone@npm:0.2.3-dev-00cccfc.0"
   dependencies:
-    "@agoric/store": "npm:^0.9.3-u14.0"
-    "@agoric/vat-data": "npm:^0.5.3-u14.0"
-    "@endo/far": "npm:0.2.18"
-  checksum: 10c0/eea07682afdf6fcc855e7218592882226af069d6fbafd6f77856b5d0661d1251f0375afe17247eff637a8c54538e32669d63395c02be18e46ca39d7319c50dd0
+    "@agoric/base-zone": "npm:0.1.1-dev-00cccfc.0+00cccfc"
+    "@agoric/vat-data": "npm:0.5.3-dev-00cccfc.0+00cccfc"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/pass-style": "npm:^1.3.1"
+  checksum: 10c0/0e9013b80a9ffe1d242e8a4e27fb27058946047dc1b4e0e6e0e0830ef422da7ca2dea7fd64faa2f781c26adcfb36e764a799d83ca0c391bf2a634ee5976d1e56
   languageName: node
   linkType: hard
 
@@ -350,7 +439,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.17.3, @babel/parser@npm:^7.24.0, @babel/parser@npm:^7.24.1":
+"@babel/parser@npm:^7.23.6, @babel/parser@npm:^7.24.0, @babel/parser@npm:^7.24.1":
   version: 7.24.4
   resolution: "@babel/parser@npm:7.24.4"
   bin:
@@ -370,7 +459,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.17.3":
+"@babel/traverse@npm:^7.23.6":
   version: 7.24.1
   resolution: "@babel/traverse@npm:7.24.1"
   dependencies:
@@ -388,7 +477,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.17.0, @babel/types@npm:^7.22.5, @babel/types@npm:^7.23.0, @babel/types@npm:^7.24.0, @babel/types@npm:^7.8.3":
+"@babel/types@npm:^7.17.0, @babel/types@npm:^7.22.5, @babel/types@npm:^7.23.0, @babel/types@npm:^7.23.6, @babel/types@npm:^7.24.0, @babel/types@npm:^7.8.3":
   version: 7.24.0
   resolution: "@babel/types@npm:7.24.0"
   dependencies:
@@ -544,93 +633,84 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/base64@npm:0.2.31":
-  version: 0.2.31
-  resolution: "@endo/base64@npm:0.2.31"
-  checksum: 10c0/6fb87ef466ed97e7c676e6e52203434a2881f43bbd95609e44385e4002fcc0869ad6f5c673423a4c060298b2e90c26cb671f03463f287a347b37cdb079caed32
+"@endo/base64@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@endo/base64@npm:1.0.4"
+  checksum: 10c0/403913f018c22c3d649f2920749652908cda63e37e6bf316339471af8b21e6563ccfb9d5e313110f2984b2d2f5fc0dc70a97cf81eba7ce45cabe8106e66057da
   languageName: node
   linkType: hard
 
-"@endo/base64@npm:^0.2.31, @endo/base64@npm:^0.2.35":
-  version: 0.2.35
-  resolution: "@endo/base64@npm:0.2.35"
-  checksum: 10c0/5935cd609cbe3da91e9bdbc1c3a2be0460c58302d0b92ae63054e537aa9e2e5648a238810ec548d7367166c72094c38e2dbf0b16a37c6987c8d7353d1b0123a1
-  languageName: node
-  linkType: hard
-
-"@endo/bundle-source@npm:2.5.2-upstream-rollup":
-  version: 2.5.2-upstream-rollup
-  resolution: "@endo/bundle-source@npm:2.5.2-upstream-rollup"
+"@endo/bundle-source@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@endo/bundle-source@npm:3.2.2"
   dependencies:
-    "@agoric/babel-generator": "npm:^7.17.4"
-    "@babel/parser": "npm:^7.17.3"
-    "@babel/traverse": "npm:^7.17.3"
-    "@endo/base64": "npm:^0.2.31"
-    "@endo/compartment-mapper": "npm:^0.8.4"
-    "@endo/init": "npm:^0.5.56"
-    "@endo/promise-kit": "npm:^0.2.56"
+    "@endo/base64": "npm:^1.0.4"
+    "@endo/compartment-mapper": "npm:^1.1.4"
+    "@endo/evasive-transform": "npm:^1.1.1"
+    "@endo/init": "npm:^1.1.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+    "@endo/where": "npm:^1.0.4"
     "@rollup/plugin-commonjs": "npm:^19.0.0"
     "@rollup/plugin-node-resolve": "npm:^13.0.0"
     acorn: "npm:^8.2.4"
-    jessie.js: "npm:^0.3.2"
     rollup: "npm:^2.79.1"
-    source-map: "npm:^0.7.3"
   bin:
     bundle-source: src/tool.js
-  checksum: 10c0/223dceb6d95f826a377d1d376dfd4dd8906cc0efbdf34ad8e05afaae402180ddda0110d2eff18079ab4ceca1e5c2a1211212d66a570ad3adcd505db69552df98
+  checksum: 10c0/1d2a65e25028c580ab38ad08a220ffef1cd0d2aabb7c742bc78e0970cdaabdc5f70595ef24999b4dc1ccdf0705b26405f93485c6374937ffe8dc2b0e05def799
   languageName: node
   linkType: hard
 
-"@endo/captp@npm:3.1.1":
-  version: 3.1.1
-  resolution: "@endo/captp@npm:3.1.1"
+"@endo/captp@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@endo/captp@npm:4.1.1"
   dependencies:
-    "@endo/eventual-send": "npm:^0.17.2"
-    "@endo/marshal": "npm:^0.8.5"
-    "@endo/nat": "npm:^4.1.27"
-    "@endo/promise-kit": "npm:^0.2.56"
-  checksum: 10c0/45cbcd647843c4a22bc8ca2718a493afaae805c68cbbe959cb4d6828afd53c5714d6e13c0a7f327561f5c5e9fc3ee2fab0a228e6b4e4f74f1fb163af8a6adbdc
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/nat": "npm:^5.0.6"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/367b61df7ee001e2202f119ce3c9e130e84c7d50e753ffaf53fa1b9836c3088c82eb49529122cdca23f952f5997c2dfa005be7cf9c31678cd4e4fb131dcf7965
   languageName: node
   linkType: hard
 
-"@endo/check-bundle@npm:0.2.18":
-  version: 0.2.18
-  resolution: "@endo/check-bundle@npm:0.2.18"
+"@endo/check-bundle@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@endo/check-bundle@npm:1.0.6"
   dependencies:
-    "@endo/base64": "npm:^0.2.31"
-    "@endo/compartment-mapper": "npm:^0.8.4"
-  checksum: 10c0/bf5c1a2974a790da3db158440686a6eec7cb67025082cd1382baf927f3744fd788be6c93aceed6dbe8cae1ff82b5412c3a8cbe331b488d552e5214888c128f98
+    "@endo/base64": "npm:^1.0.4"
+    "@endo/compartment-mapper": "npm:^1.1.4"
+    "@endo/errors": "npm:^1.2.1"
+  checksum: 10c0/52c8ec211e8dfa5c591766c5ea0aa788eca0efa7a222389a3bcffddb34b2d1fa0922cf51bacc0b02b92e210488fde12969daf63e07894e545f2be792ca6579ce
   languageName: node
   linkType: hard
 
-"@endo/cjs-module-analyzer@npm:^0.2.31, @endo/cjs-module-analyzer@npm:^0.2.32":
-  version: 0.2.35
-  resolution: "@endo/cjs-module-analyzer@npm:0.2.35"
-  checksum: 10c0/26d571803afe889ba327979c9208a037d8cbbb6e689cf20e10bd8d0658936a35b37d61b86180dbed6ac49ac284307177b16eeb10d6afe61c7674d4c6507913ab
+"@endo/cjs-module-analyzer@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@endo/cjs-module-analyzer@npm:1.0.4"
+  checksum: 10c0/c5d21145d7507e52ba282fe62a8693cb002db0cc2e1ae8c36921dad727604a64f440a11e20224e318a90f19bec61dd4897135ad415502abad59669e35bc663cc
   languageName: node
   linkType: hard
 
-"@endo/compartment-mapper@npm:0.8.4":
-  version: 0.8.4
-  resolution: "@endo/compartment-mapper@npm:0.8.4"
+"@endo/common@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@endo/common@npm:1.2.1"
   dependencies:
-    "@endo/cjs-module-analyzer": "npm:^0.2.31"
-    "@endo/static-module-record": "npm:^0.7.19"
-    "@endo/zip": "npm:^0.2.31"
-    ses: "npm:^0.18.4"
-  checksum: 10c0/08c1959c927d04983a4f150a9eb37175dcbe33a1f97b916ce7ebfe0df71f72578d9d0916555915017f647e51ab11c1ec13cfcbfa9c09f3f669b6642d43f2745d
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/8f689ad5cee0d0906b6ca61064abe8bf7a384b127554b2bd0010b8d27bb4a5bb84fd06c66979d6a2de96aa058be8ce6b12f4e02fb7a59a145b754ac3c3ebe4df
   languageName: node
   linkType: hard
 
-"@endo/compartment-mapper@npm:^0.8.4":
-  version: 0.8.5
-  resolution: "@endo/compartment-mapper@npm:0.8.5"
+"@endo/compartment-mapper@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@endo/compartment-mapper@npm:1.1.4"
   dependencies:
-    "@endo/cjs-module-analyzer": "npm:^0.2.32"
-    "@endo/static-module-record": "npm:^0.7.20"
-    "@endo/zip": "npm:^0.2.32"
-    ses: "npm:^0.18.5"
-  checksum: 10c0/81e8c1c8052319ddd2d6328bc7f120e41593e01961a318192b71f12990a4fa5a014f56d5ef146f390c09a615118b61f4daae790972aa47530598b74189ead541
+    "@endo/cjs-module-analyzer": "npm:^1.0.4"
+    "@endo/static-module-record": "npm:^1.1.1"
+    "@endo/zip": "npm:^1.0.4"
+    ses: "npm:^1.4.1"
+  checksum: 10c0/c6d8346d6dbaffa58ce2bcf0aab6a0875a1829d8926cd607fab76b349477cf9c0a5028a584758b44a6aa2390daa9517ba175263c1bc3be1b49b9065f193b3c73
   languageName: node
   linkType: hard
 
@@ -657,10 +737,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/eventual-send@npm:0.17.2":
-  version: 0.17.2
-  resolution: "@endo/eventual-send@npm:0.17.2"
-  checksum: 10c0/e86fdd5a085d736b1840196dc9ee5b5bc1ed65bbaa4e2d7c9dcc1962e986f4e5385186fb4f2ab2a89577d5b929cb98962eb93c1d3bf7d62203e7dd03699faefb
+"@endo/evasive-transform@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@endo/evasive-transform@npm:1.1.1"
+  dependencies:
+    "@agoric/babel-generator": "npm:^7.17.6"
+    "@babel/parser": "npm:^7.23.6"
+    "@babel/traverse": "npm:^7.23.6"
+    source-map: "npm:0.7.4"
+  checksum: 10c0/f1c2d6a5bb3160b047a8858a9cea8d7cdcd0e98eb47f5d14188eb927d5d05cdaabd091502ae92d1512e2d320448d0dca611552fb8b3d8646460fbbb23889587a
   languageName: node
   linkType: hard
 
@@ -692,13 +777,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/far@npm:0.2.18":
-  version: 0.2.18
-  resolution: "@endo/far@npm:0.2.18"
+"@endo/exo@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@endo/exo@npm:1.4.0"
   dependencies:
-    "@endo/eventual-send": "npm:^0.17.2"
-    "@endo/pass-style": "npm:^0.1.3"
-  checksum: 10c0/0df1ab4e2f3969f1256c0f6323865b384db35565c11e6e97bd3e348f0e12b6d895fee7590439dd37d34f0e0aa980b9e4cc6e250e97c1d7cb2030df8468d5b985
+    "@endo/common": "npm:^1.2.1"
+    "@endo/env-options": "npm:^1.1.3"
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/far": "npm:^1.1.1"
+    "@endo/pass-style": "npm:^1.3.1"
+    "@endo/patterns": "npm:^1.3.1"
+  checksum: 10c0/20b09a93102ed907e5d85e7ca7015bc9f676d79471c2fc07ef53b3492842edfc9fc67ed0f90751baa943082e4d74e9661372e10782ccdf738c7a6df12397051c
   languageName: node
   linkType: hard
 
@@ -712,7 +802,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/far@npm:^1.0.0, @endo/far@npm:^1.1.0":
+"@endo/far@npm:^1.0.0, @endo/far@npm:^1.1.0, @endo/far@npm:^1.1.1":
   version: 1.1.1
   resolution: "@endo/far@npm:1.1.1"
   dependencies:
@@ -723,46 +813,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/import-bundle@npm:0.3.4":
-  version: 0.3.4
-  resolution: "@endo/import-bundle@npm:0.3.4"
+"@endo/import-bundle@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@endo/import-bundle@npm:1.1.1"
   dependencies:
-    "@endo/base64": "npm:^0.2.31"
-    "@endo/compartment-mapper": "npm:^0.8.4"
-  checksum: 10c0/3d5b235867c210deb90b5981a309142010e2e63d3ee1492855676e182529e091fbf27282dff5756fefcdbc9ae86f42746701b66398754d094e486e06afa940fc
+    "@endo/base64": "npm:^1.0.4"
+    "@endo/compartment-mapper": "npm:^1.1.4"
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/where": "npm:^1.0.4"
+    ses: "npm:^1.4.1"
+  checksum: 10c0/64780c388b009f5dc6d077236d1d6c2a5975f88a020fab211f42c2532582b128bcb637a44e57985f07edeb45542b0c1e19c1088c2a965dcda8ceab18caceb5cd
   languageName: node
   linkType: hard
 
-"@endo/init@npm:0.5.56":
-  version: 0.5.56
-  resolution: "@endo/init@npm:0.5.56"
+"@endo/init@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@endo/init@npm:1.1.1"
   dependencies:
-    "@endo/base64": "npm:^0.2.31"
-    "@endo/eventual-send": "npm:^0.17.2"
-    "@endo/lockdown": "npm:^0.1.28"
-    "@endo/promise-kit": "npm:^0.2.56"
-  checksum: 10c0/f7e8b6b524de282683f601764d87bc72f0a82e63ed7d2fbe1c40c45f41eb10b25cde49a570c879fb46449e5dc28d0a288536847051dd1b4171bb0092c80a6403
+    "@endo/base64": "npm:^1.0.4"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/lockdown": "npm:^1.0.6"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/537ef9114fd7d6313104edbb4de6371fca61a8e3660c465f49d61442a134104e81e877fb91714a0c6582407b3b273106cb3f67b51456ef3dfe0950e565b28a7f
   languageName: node
   linkType: hard
 
-"@endo/init@npm:^0.5.56":
-  version: 0.5.60
-  resolution: "@endo/init@npm:0.5.60"
+"@endo/lockdown@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@endo/lockdown@npm:1.0.6"
   dependencies:
-    "@endo/base64": "npm:^0.2.35"
-    "@endo/eventual-send": "npm:^0.17.6"
-    "@endo/lockdown": "npm:^0.1.32"
-    "@endo/promise-kit": "npm:^0.2.60"
-  checksum: 10c0/247f189139e3ba244ddcf9c3252e865783020c1524cfab94210b504afaecc11f0e9d61ab7beef9fbe221c572577113a7a4d3a12057f9e9072a4e1e7eda493c62
-  languageName: node
-  linkType: hard
-
-"@endo/lockdown@npm:^0.1.28, @endo/lockdown@npm:^0.1.32":
-  version: 0.1.32
-  resolution: "@endo/lockdown@npm:0.1.32"
-  dependencies:
-    ses: "npm:^0.18.8"
-  checksum: 10c0/9756759e4b099faa2293d03d47e34c176b68fb08a82714cd2b2e0b49fc0534972582f08ba82282bdfea79688b408d61e07980eacadfb70e7a8fef9fea6b16f6e
+    ses: "npm:^1.4.1"
+  checksum: 10c0/e8e071a499ada5fb3525404712cb2041a475fae996cd4dbb33e13608f3de426ed4f287484453b2fb61b6ec4263a292d18de82322184002f78e10872d8b8b86ec
   languageName: node
   linkType: hard
 
@@ -790,6 +871,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@endo/marshal@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@endo/marshal@npm:1.4.1"
+  dependencies:
+    "@endo/common": "npm:^1.2.1"
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/nat": "npm:^5.0.6"
+    "@endo/pass-style": "npm:^1.3.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/405fdaf6b760082d30fddb032de8418763c4c405828a339036da038e4fc1efa6a3aefcd9c942e27820c74a2f6f40984bea74214ad23762a4f7f20e000f602028
+  languageName: node
+  linkType: hard
+
 "@endo/nat@npm:4.1.27":
   version: 4.1.27
   resolution: "@endo/nat@npm:4.1.27"
@@ -804,14 +899,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/netstring@npm:0.3.26":
-  version: 0.3.26
-  resolution: "@endo/netstring@npm:0.3.26"
+"@endo/nat@npm:^5.0.6":
+  version: 5.0.6
+  resolution: "@endo/nat@npm:5.0.6"
+  checksum: 10c0/7de7891385ad0d2f1be042064e01133abe389851d371ec8340c2b493b6b6bfffdede8d85ea8b86f88c8cbe3e60085141f30f96b89391f8674a5aae6f9657669b
+  languageName: node
+  linkType: hard
+
+"@endo/netstring@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@endo/netstring@npm:1.0.6"
   dependencies:
-    "@endo/init": "npm:^0.5.56"
-    "@endo/stream": "npm:^0.3.25"
-    ses: "npm:^0.18.4"
-  checksum: 10c0/5581de2cead9b37bf77688a4a2021db1cf5ce1a9d6334dc77eb3b15a100de2ae4ce73adde554813b38907eb5ec64157c3bc9e670c60fad3e316f53e959ce4316
+    "@endo/init": "npm:^1.1.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+    "@endo/stream": "npm:^1.2.1"
+    ses: "npm:^1.4.1"
+  checksum: 10c0/b3220ae5facd289c2c358a90ef1f2b4c79dbadeb0f24192c6212c224007c58542f69d7740def987aadf53964c934010775f0701418854fa2ba25a2b178f81b33
   languageName: node
   linkType: hard
 
@@ -870,12 +973,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/promise-kit@npm:0.2.56":
-  version: 0.2.56
-  resolution: "@endo/promise-kit@npm:0.2.56"
+"@endo/patterns@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "@endo/patterns@npm:1.3.1"
   dependencies:
-    ses: "npm:^0.18.4"
-  checksum: 10c0/ceb59dae724681f0f88a863efbabbd25a142b536664c2c6cbdd8532bc45317f99bc70d837c77d8c54d39d7baeac8fd70fa9787304fd169d5f2a1f014f46b9498
+    "@endo/common": "npm:^1.2.1"
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/marshal": "npm:^1.4.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+  checksum: 10c0/22c0f5a674bc211013f4d2911de5bcd892fc37945bcb42a1df1dd376dc8520c36ada6f01e8ffa8996b5d2aa4f39b62170c6e64dcd47385c13520f6dff79475d7
   languageName: node
   linkType: hard
 
@@ -897,72 +1004,66 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@endo/ses-ava@npm:0.2.40":
-  version: 0.2.40
-  resolution: "@endo/ses-ava@npm:0.2.40"
+"@endo/ses-ava@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@endo/ses-ava@npm:1.2.1"
   dependencies:
-    ses: "npm:^0.18.4"
-  checksum: 10c0/5b11104107a1a43724a686cceb425bed4235aad9a8e2d5bf13e4848a08b1711b29ea40bd31aec4991c328578f3f4532975f26f99377392b026c39b851f8f0979
+    "@endo/env-options": "npm:^1.1.3"
+    "@endo/init": "npm:^1.1.1"
+    ses: "npm:^1.4.1"
+  peerDependencies:
+    ava: ^5.3.0 || ^6.1.2
+  checksum: 10c0/0af1ef7b16ff076afb8b630e7ebb5d83163ea183e917baa3d92a6baffdac1968a615cff47d95f5124dc1216648daffef3279013ea2b9af1b0aaaf39ca11bb6cc
   languageName: node
   linkType: hard
 
-"@endo/static-module-record@npm:^0.7.19, @endo/static-module-record@npm:^0.7.20":
-  version: 0.7.20
-  resolution: "@endo/static-module-record@npm:0.7.20"
+"@endo/static-module-record@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@endo/static-module-record@npm:1.1.1"
   dependencies:
     "@agoric/babel-generator": "npm:^7.17.6"
-    "@babel/parser": "npm:^7.17.3"
-    "@babel/traverse": "npm:^7.17.3"
-    "@babel/types": "npm:^7.17.0"
-    ses: "npm:^0.18.5"
-  checksum: 10c0/420ca948cd7b764f0a8dca8224e9e73536769e801c2aa7f6070dc22c41080a95026675a37d306b6d143b735bb2bc2013944c9e88448457df5e6f01908bdf7b25
+    "@babel/parser": "npm:^7.23.6"
+    "@babel/traverse": "npm:^7.23.6"
+    "@babel/types": "npm:^7.23.6"
+    ses: "npm:^1.4.1"
+  checksum: 10c0/55736afc5326bf9275c936731868f08489397c77c95ab19c92b43eaa5c616089477c8a7f4b546e2207fd1202620649c938644013f7693251dc463951dde254e9
   languageName: node
   linkType: hard
 
-"@endo/stream-node@npm:0.2.26":
-  version: 0.2.26
-  resolution: "@endo/stream-node@npm:0.2.26"
+"@endo/stream-node@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@endo/stream-node@npm:1.1.1"
   dependencies:
-    "@endo/init": "npm:^0.5.56"
-    "@endo/stream": "npm:^0.3.25"
-    ses: "npm:^0.18.4"
-  checksum: 10c0/23a1d48ac1c7ad722c02b825225936e9e78c9c2f4a348977ffa4141a3c89665a133daa070a7da3cc5b0b52ac9e4a93bdb4850b695e9d174ee4fb52713485c789
+    "@endo/errors": "npm:^1.2.1"
+    "@endo/init": "npm:^1.1.1"
+    "@endo/stream": "npm:^1.2.1"
+    ses: "npm:^1.4.1"
+  checksum: 10c0/b2bfd4dbb28cf3e90974e999030e50726de23630b678b2183202f4c144a8b8ac418ee70ed33e5cd8f2ff3e97c5f3d8103563911e690e9cbef8f92f6e827858ea
   languageName: node
   linkType: hard
 
-"@endo/stream@npm:0.3.25":
-  version: 0.3.25
-  resolution: "@endo/stream@npm:0.3.25"
+"@endo/stream@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@endo/stream@npm:1.2.1"
   dependencies:
-    "@endo/eventual-send": "npm:^0.17.2"
-    "@endo/promise-kit": "npm:^0.2.56"
-    ses: "npm:^0.18.4"
-  checksum: 10c0/3a572465c33d5a66da697780da9e236e3caa80d3f43c2e35af6aadd11b43d10968573125c876a6b24ec716866c090ad0782b2df59f0834873059294867d4752c
+    "@endo/eventual-send": "npm:^1.2.1"
+    "@endo/promise-kit": "npm:^1.1.1"
+    ses: "npm:^1.4.1"
+  checksum: 10c0/2d78b05a25eda2e6fdd2bce35cf988e6ccf1687c7a3ae14a3492934b8dc0f745ecb42128dd0825b7630ce755f99645e520769edb1b80f936dec3a63858a2ad75
   languageName: node
   linkType: hard
 
-"@endo/stream@npm:^0.3.25":
-  version: 0.3.29
-  resolution: "@endo/stream@npm:0.3.29"
-  dependencies:
-    "@endo/eventual-send": "npm:^0.17.6"
-    "@endo/promise-kit": "npm:^0.2.60"
-    ses: "npm:^0.18.8"
-  checksum: 10c0/a1bbf1d643193650efb4b68784193729ed6c1e2c9039ba2a51502b0ebf37691b338961ed9f69e81d4edec1b40e1f6d4ab1887a6ddf824bcda5d094e6d1489282
+"@endo/where@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@endo/where@npm:1.0.4"
+  checksum: 10c0/a3a81a9ed0a9c65dead6fdc4be31544869697f6748bb67743dc3595c7f326aa8ee6d66509bc8347f1918de4a610d56f0998a431a7986ef8582808b9dee1d5a43
   languageName: node
   linkType: hard
 
-"@endo/zip@npm:0.2.31":
-  version: 0.2.31
-  resolution: "@endo/zip@npm:0.2.31"
-  checksum: 10c0/6c3564be33ad7967678f7db2a942191ee12c43fe88868bba93e70ab882d3a650903597e2a85aaaf40aba86654bbc68d570970940440ea12ffe26a790c718d534
-  languageName: node
-  linkType: hard
-
-"@endo/zip@npm:^0.2.31, @endo/zip@npm:^0.2.32":
-  version: 0.2.35
-  resolution: "@endo/zip@npm:0.2.35"
-  checksum: 10c0/bb81c085e47a5d67342dcc039b2f471e4679e08de95cea3cdba598e2644125ec0b2002e7a1d3ff9a10977380487a58688d7e2c4d1d5525c16e46fed4b735372d
+"@endo/zip@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@endo/zip@npm:1.0.4"
+  checksum: 10c0/f5a8fa5bc32b5909164af238a0b1b801a121549ae512228fe6d2edcd6167116c4a88886f9a009f4702d4381388cbafd95adb912a64f9c8cfd59c3b251e984e78
   languageName: node
   linkType: hard
 
@@ -1859,14 +1960,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:^8.2.0":
-  version: 8.7.0
-  resolution: "better-sqlite3@npm:8.7.0"
+"better-sqlite3@npm:^9.1.1":
+  version: 9.5.0
+  resolution: "better-sqlite3@npm:9.5.0"
   dependencies:
     bindings: "npm:^1.5.0"
     node-gyp: "npm:latest"
     prebuild-install: "npm:^7.1.1"
-  checksum: 10c0/2583401b08531eee74c083c73f3a5902bc142b0e1c16de5b9caa92ee94f544e2cb512c214de2f762a6c83e593f26f70013214344a9ea66ace6d0619efbf04a1e
+  checksum: 10c0/285f9a7e4b54b3bc9a8a034e4b19a73dab364637581429fd55765612429bf37790606cf53e01b0dd1feac0c5b02a30098916a595e11083a42dd503f739412c25
   languageName: node
   linkType: hard
 
@@ -3409,7 +3510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jessie.js@npm:^0.3.2":
+"jessie.js@npm:^0.3.4":
   version: 0.3.4
   resolution: "jessie.js@npm:0.3.4"
   dependencies:
@@ -4062,9 +4163,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "orchestration-api-spec@workspace:."
   dependencies:
-    "@agoric/ertp": "npm:0.16.3-u14.0"
+    "@agoric/ertp": "npm:0.16.3-dev-00cccfc.0"
     "@agoric/time": "npm:0.3.3-u14.0"
-    "@agoric/zoe": "npm:0.26.3-u14.0"
+    "@agoric/zoe": "npm:0.26.3-dev-00cccfc.0"
     "@cosmjs/amino": "npm:^0.32.2"
     "@cosmjs/proto-signing": "npm:^0.32.2"
     "@cosmjs/stargate": "npm:^0.32.2"
@@ -4558,7 +4659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ses@npm:^0.18.4, ses@npm:^0.18.5, ses@npm:^0.18.8":
+"ses@npm:^0.18.8":
   version: 0.18.8
   resolution: "ses@npm:0.18.8"
   dependencies:
@@ -4713,17 +4814,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"source-map@npm:0.7.4":
+  version: 0.7.4
+  resolution: "source-map@npm:0.7.4"
+  checksum: 10c0/dc0cf3768fe23c345ea8760487f8c97ef6fca8a73c83cd7c9bf2fde8bc2c34adb9c0824d6feb14bc4f9e37fb522e18af621543f1289038a66ac7586da29aa7dc
+  languageName: node
+  linkType: hard
+
 "source-map@npm:^0.5.0":
   version: 0.5.7
   resolution: "source-map@npm:0.5.7"
   checksum: 10c0/904e767bb9c494929be013017380cbba013637da1b28e5943b566031e29df04fba57edf3f093e0914be094648b577372bd8ad247fa98cfba9c600794cd16b599
-  languageName: node
-  linkType: hard
-
-"source-map@npm:^0.7.3":
-  version: 0.7.4
-  resolution: "source-map@npm:0.7.4"
-  checksum: 10c0/dc0cf3768fe23c345ea8760487f8c97ef6fca8a73c83cd7c9bf2fde8bc2c34adb9c0824d6feb14bc4f9e37fb522e18af621543f1289038a66ac7586da29aa7dc
   languageName: node
   linkType: hard
 

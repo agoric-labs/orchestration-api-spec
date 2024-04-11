@@ -2,15 +2,8 @@ import { Timestamp } from '@agoric/time';
 
 import { Delegation, Redelegation, UnbondingDelegation } from './delegation.js';
 
-// XXX these types aren't resolving in this repo; these are placeholders
-// import type { Invitation } from '@agoric/zoe';
-// import type { Amount, Brand, Payment, Purse } from '@agoric/ertp';
-type Invitation = unknown;
-type Brand = unknown;
-type Amount<T extends 'nat' = 'nat'> = { brand: Brand; value: bigint };
-type Ratio = { numerator: Amount; denominator: Amount };
-type Payment = unknown;
-type Purse = unknown;
+import type { Invitation } from '@agoric/zoe/exported.js';
+import type { Amount, Brand, Payment, Purse } from '@agoric/ertp/exported.js';
 
 /** static declaration of known chain types will allow type support for
  * additional chain-specific operations like `liquidStake`
