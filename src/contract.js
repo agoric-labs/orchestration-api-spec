@@ -7,7 +7,6 @@ import { M } from '@endo/patterns';
 import '@agoric/zoe/src/contractFacet/types-ambient.js';
 import { orcUtils } from './utils';
 
-
 /**
  * @param {ZCF} zcf
  * @param {{ orchestratorService: unknown}} privateArgs
@@ -22,10 +21,18 @@ export const start = async (zcf, privateArgs) => {
   /** @type {(any) => { HandlerMaker: import('./orchestration').OrchestrationHandlerMaker}} */
   const makeOrchestrator = (_ignore) => undefined;
 
-  const orchestrate = makeOrchestrator({ zone, timerService, zcf, vstorage, orchestratorService });
+  const orchestrate = makeOrchestrator({
+    zone,
+    timerService,
+    zcf,
+    vstorage,
+    orchestratorService,
+  });
 
   /** @type {OfferHandler} */
-  const unbondAndLiquidStake = orchestrate('LSTTia', { zcf },
+  const unbondAndLiquidStake = orchestrate(
+    'LSTTia',
+    { zcf },
     async (/** @type {Orchestrator} */ orch, { zcf }, seat, offerArgs) => {
       const { give } = seat.getProposal();
       !AmountMath.isEmpty(give.USDC.value) || Fail`Must provide USDC.`;
@@ -45,12 +52,14 @@ export const start = async (zcf, privateArgs) => {
       await celestiaAccount.transfer(tiaAmt, strideAccount.getAddress());
 
       await strideAccount.liquidStake(tiaAmt);
-
-    });
+    },
+  );
 
   /** deprecated historical example */
   /** @type {OfferHandler} */
-  const swapAndStakeHandler = orchestrate('LSTTia', { zcf },
+  const swapAndStakeHandler = orchestrate(
+    'LSTTia',
+    { zcf },
     async (/** @type {Orchestrator} */ orch, { zcf }, seat, offerArgs) => {
       const { give } = seat.getProposal();
       !AmountMath.isEmpty(give.USDC.value) || Fail`Must provide USDC.`;
@@ -91,7 +100,8 @@ export const start = async (zcf, privateArgs) => {
 
       // XXX close localAccount?
       return celestiaAccount; // should be continuing inv since this is an offer?
-    });
+    },
+  );
 
   const makeSwapAndStakeInvitation = () =>
     zcf.makeInvitation(
