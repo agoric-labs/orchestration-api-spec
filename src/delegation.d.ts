@@ -11,7 +11,7 @@ export type Delegation = {
   balance: Coin;
 };
 
-export type UnbodingDelegation = {
+export type UnbondingDelegation = {
   delegator_address: ChainAddress;
   validator_address: ChainAddress;
   entries: {

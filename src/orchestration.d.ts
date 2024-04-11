@@ -1,6 +1,6 @@
 import { Timestamp } from '@agoric/time';
 
-import { Delegation, Redelegation, UnbodingDelegation as UnbondingDelegation } from './delegation.js';
+import { Delegation, Redelegation, UnbondingDelegation } from './delegation.js';
 
 // XXX these types aren't resolving in this repo; these are placeholders
 // import type { Invitation } from '@agoric/zoe';
@@ -17,15 +17,32 @@ type Purse = unknown;
  * additional chain-specific operations like `liquidStake`
  */
 export type KnownChains = {
-  // these are all ChainInfo
-  stride: null,
-  cosmos: null,
-  agoric: null,
-  celestia: null,
+  stride: ChainInfo,
+  cosmos: ChainInfo,
+  agoric: ChainInfo,
+  celestia: ChainInfo,
+  osmosis: ChainInfo,
+  // ...
 };
 
+/** A helper type for type extensions. */
 export type TypeUrl = string;
+
+/** A denom that designates a token type on some blockchain. 
+ *
+ * Multiple denoms may designate the same underlying base denom (e.g., `uist`,
+ * `uatom`) on different Chains or on the same Chain via different paths. On
+ * Cosmos chains, all but the base denom are IBC style denoms, but that may vary
+ * across other chains. All the denoms that designate the same underlying base
+ * denom form an equivalence class, along with the unique Brand on the local
+ * Chain. Some operations accept any member of the equivalence class to
+ * effectively designate the corresponding token type on the target chain.
+ */
 export type Denom = string; // ibc/... or uist
+
+/** In many cases, either a denom string or a local Brand can be used to
+ * designate a remote token type. */
+export type DenomArg = Brand | Denom;
 
 export type Proto3JSONMsg = {
   '@type': TypeUrl;
@@ -37,11 +54,13 @@ export type EncodeObject = {
   value: Uint8Array;
 };
 
+/** An address on some blockchain, e.g., cosmos, eth, etc. */
 export type ChainAddress = {
   chainId: string; // 1 for ethereum, cosmoshub-4 for cosmos
   address: string; // can be bech32 or hex encoded
 };
 
+/** An address for a validator on some blockchain, e.g., cosmos, eth, etc. */
 export type ValidatorAddress = {
   chainId: string; // 1 for ethereum, cosmoshub-4 for cosmos
   address: string; // can be bech32 or hex encoded //
@@ -53,21 +72,56 @@ export declare function makeValidatorAddress(
   address: string,
 ): ValidatorAddress;
 
+/** Details for setup will be determined in the implementation. */
 export interface OrchestrationGovernor {
-  registerChain: (chainName: string, connection: string) => Promise<void>;
+  registerChain: (chainName: string, info: ChainInfo) => Promise<void>;
 }
+
+/** Description for an amount of some fungible currency */
+export type ChainAmount = {
+  denom: Denom;
+  value: bigint; // Nat
+}
+
+/** Amounts can be provided as pure data using denoms or as native Amounts */
+export type AmountArg = ChainAmount | Amount;
 
 // chainName: managed like agoricNames. API consumers can make/provide their own
 export interface Orchestrator {
   getChain: (chainName: keyof KnownChains) => Promise<Chain>;
+
+  /**
+   * For a denom, return information about a denom including the equivalent 
+   * local Brand, the Chain on which the denom is held, and the Chain that
+   * issues the corresponding asset.
+   * @param denom 
+   */
+  getBrandInfo: (denom: Denom) => {
+    /** The well-known Brand on Agoric for the direct asset  */
+    brand?: Brand,
+    /** The Chain at which the argument `denom` exists  */
+    chain: Chain,
+    /** The Chain that is the issuer of the underlying asset */
+    base: Chain,
+    /** the Denom for the underlying asset on its issuer chain */
+    baseDenom: Denom,
+  }
+
+  /** 
+   * Convert an amount described in native data to a local, structured Amount.
+   * @param amount - the described amount
+   * @returns the Amount in local structuerd format
+   */
+  asAmount: (amount: ChainAmount) => Amount;
 }
 
 // orchestrate('LSTTia', { zcf }, async (orch, { zcf }, seat, offerArgs) => {...})
 // export type OrchestrationHandlerMaker<Context> = 
+// TODO @turadg add typed so that the ctx object and args are consistently typed
 export type OrchestrationHandlerMaker =
   (durableName: string,
     ctx: object,
-    fn: (Orchestrator, object, ...args) => object,
+    fn: (Orchestrator, ctx: object, ...args) => object,
   ) => ((...args) => object);
 
 /**
@@ -77,6 +131,7 @@ export type EthChainInfo = {
   chainId: string;
   allegedName: string;
 };
+
 /**
  * Info for a Cosmos-based chain.
  */
@@ -115,7 +170,7 @@ interface QueryResult { }
 /**
  * An object for access the core functions of a remote chain.
  * 
- * Note that "remote" can mean the agoric chain; it's just that 
+ * Note that "remote" can mean the local chain; it's just that 
  * accounts are treated as remote/arms length for consistency.
  */
 export interface Chain {
@@ -125,20 +180,32 @@ export interface Chain {
    * Make a new account on the remote chain. 
    * @param name - account name for logging and tracing purposes
    * @returns an object that controls a new remote account on Chain
+   * 
+   * TODO add Features types so that types reflect additional 
+   * operations such as `liquidStake` where appropriate
    */
   makeAccount: (name?: string) => Promise<OrchestrationAccount>;
   // FUTURE supply optional port object; also fetch port object
 
   /**
-   * query external chain state 
+   * Low level operation to query external chain state (e.g., governance params)
+   * @param queries
+   * @returns 
+   * 
    */
   query: (queries: Proto3JSONMsg[]) => Promise<Iterable<QueryResult>>;
 
-  // TODO we need a way to have multiple offers get the same orchestrator.
+  /**
+   * Get the Denom on this Chain corresponding to the denom or Brand on 
+   * this or another Chain.
+   * @param denom 
+   * @returns 
+   */
+  getLocalDenom: (denom: DenomArg) => Promise<Denom>;
 }
 
 /**
- * An object that supports low-level queries and operations for an account on a remote chain.
+ * Low level object that supports queries and operations for an account on a remote chain.
  */
 export interface ChainAccount {
   /**
@@ -169,30 +236,34 @@ export interface ChainAccount {
   prepareTransfer: () => Promise<Invitation>;
 }
 
-export type BrandOrDenom = Brand | Denom;
-
 /**
  * An object that supports high-level operations for an account on a remote chain.
  */
 export interface OrchestrationAccount {
+
   /** @returns the underlying low-level operation object. */
   getChainAcccount: () => Promise<ChainAccount>;
+
   /**
    * @returns the address of the account on the remote chain
    */
   getAddress: () => ChainAddress;
+
   /** @returns an array of amounts for every balance in the account. */
-  getBalances: () => Promise<Amount[]>;
+  getBalances: () => Promise<ChainAmount[]>;
+
   /** @returns the balance of a specific denom for the account. */
-  getBalance: (denom: BrandOrDenom) => Promise<Amount>;
+  getBalance: (denom: DenomArg) => Promise<ChainAmount>;
 
   getDenomTrace: (
     denom: string,
   ) => Promise<{ path: string; base_denom: string }>;
+
   /**
    * @returns all active delegations from the account to any validator (or [] if none)
    */
   getDelegations: () => Promise<Delegation[]>;
+
   /**
    * @returns the active delegation from the account to a specific validator. Return an 
    * empty Delegation if there is no delegation.
@@ -200,44 +271,53 @@ export interface OrchestrationAccount {
    * TODO what does it return if there's no delegation?
    */
   getDelegation: (validator: ValidatorAddress) => Promise<Delegation>;
+
   /**
    * @returns the unbonding delegations from the account to any validator (or [] if none)
    */
   getUnbondingDelegations: () => Promise<UnbondingDelegation[]>;
+
   /**
    * @returns the unbonding delegations from the account to a specific validator (or [] if none)
    */
   getUnbondingDelegation: (validator: ValidatorAddress) => Promise<UnbondingDelegation>;
+
   getRedelegations: () => Promise<Redelegation[]>;
+
   getRedelegation: (
     srcValidator: ValidatorAddress,
     dstValidator?: ValidatorAddress,
   ) => Promise<Redelegation>;
+
   /**
    * Get the pending rewards for the account.
    * @returns the amounts of the account's rewards pending from all validators
    */
-  getRewards: () => Promise<Amount[]>;
+  getRewards: () => Promise<ChainAmount[]>;
+
   /**
    * Get the rewards pending with a specific validator.
    * @param validator - the validator address to query for
    * @returns the amount of the account's rewards pending from a specific validator
    */
-  getReward: (validator: ValidatorAddress) => Promise<Amount[]>;
+  getReward: (validator: ValidatorAddress) => Promise<ChainAmount[]>;
+
   /**
    * Transfer amount to another account on the same chain. The promise settles when the transfer is complete.
    * @param toAccount - the account to send the amount to. MUST be on the same chain
    * @param amount - the amount to send
    * @returns void
    */
-  send: (toAccount: ChainAddress, amount: Amount) => Promise<void>;
+  send: (toAccount: ChainAddress, amount: AmountArg) => Promise<void>;
+
   /**
    * Delegate an amount to a validator. The promise settles when the delegation is complete.
    * @param validator - the validator to delegate to
    * @param amount  - the amount to delegate
    * @returns void
    */
-  delegate: (validator: ValidatorAddress, amount: Amount) => Promise<void>;
+  delegate: (validator: ValidatorAddress, amount: AmountArg) => Promise<void>;
+
   /**
    * Redelegate from one delegator to another.
    * Settles when teh redelegation is established, not 21 days later.
@@ -249,14 +329,16 @@ export interface OrchestrationAccount {
   redelegate: (
     srcValidator: ValidatorAddress,
     dstValidator: ValidatorAddress,
-    amount: Amount,
+    amount: AmountArg,
   ) => Promise<void>;
+
   /**
    * Undelegate a delegation. The promise settles when the undelegation is complete.
    * @param delegation - the delegation to undelegate
    * @returns void
    */
   undelegate: (delegation: Delegation) => Promise<void>;
+
   /**
    * Undelegate multiple delegations (concurrently). The promise settles when all the delegations are undelegated.
    *
@@ -265,17 +347,20 @@ export interface OrchestrationAccount {
    * @returns
    */
   undelegateAll: (delegations: Delegation[]) => Promise<void>;
+
   /**
    * Withdraw rewards from all validators. The promise settles when the rewards are withdrawn.
    * @returns The total amounts of rewards withdrawn
    */
-  withdrawRewards: () => Promise<Amount[]>;
+  withdrawRewards: () => Promise<ChainAmount[]>;
+
   /**
    * Withdraw rewards from a specific validator. The promise settles when the rewards are withdrawn.
    * @param validator - the validator to withdraw rewards from
    * @returns
    */
-  withdrawReward: (validator: ValidatorAddress) => Promise<Amount[]>;
+  withdrawReward: (validator: ValidatorAddress) => Promise<ChainAmount[]>;
+
   /**
    * Transfer an amount to another account, typically on another chain.
    * The promise settles when the transfer is complete.
@@ -287,10 +372,11 @@ export interface OrchestrationAccount {
    * TODO document the mapping from the address to the destination chain.
    */
   transfer: (
-    amount: Amount,
+    amount: AmountArg,
     destination: ChainAddress,
     memo?: string,
   ) => Promise<void>;
+
   /**
    * Transfer an amount to another account in multiple steps. The promise settles when
    * the entire path of the transfer is complete.
@@ -298,12 +384,14 @@ export interface OrchestrationAccount {
    * @param msg - the transfer message, including follow-up steps
    * @returns void
    */
-  transferSteps: (amount: Amount, msg: TransferMsg) => Promise<void>;
-
+  transferSteps: (amount: AmountArg, msg: TransferMsg) => Promise<void>;
 }
 
-// TODO simplify the TransferMsg composition
-
+/** 
+ * Internal structure for TransferMsgs.
+ * 
+ * NOTE Expected to change, so consider an opaque structure.
+ */
 export type TransferMsg = {
   toAccount: ChainAddress;
   timeout?: Timestamp;
@@ -311,35 +399,25 @@ export type TransferMsg = {
   data?: object;
 };
 
+// Example
+// await icaNoble.transferSteps(usdcAmt,
+//   osmosisSwap(tiaBrand, { pool: 1224, slippage: 0.05 }, icaCel.getAddress()));
+
+/**
+ * @param pool - Required. Pool number
+ */
+export type OsmoSwapOptions = {
+  pool: string,
+  slippage?: Number,
+}
+
 /**
  * Make a TransferMsg for a swap operation.
  * @param denom - the currency to swap to
+ * @param options 
  * @param slippage - the maximum acceptable slippage
  */
-export type SwapTransferFn = (
-  denom: BrandOrDenom,
-  slippage?: Ratio,
-) => TransferMsg;
-/**
- * Make a TransferMsg for a sequence of transfer steps.
- * @param steps - the transfer steps
- */
-export type SequenceTransferFn = (...steps: TransferMsg[]) => TransferMsg;
-/**
- * Make a TransferMsg for a simple transfer to a destination account.
- * @param dest - the destination account
- */
-export type SimpleTransferFn = (dest: ChainAddress) => TransferMsg;
-
-/**
- * Examples
- * ```
- * const osmoSwap: SwapTransferFn = ...
- * const steps: SequenceTransferFn = ...
- * const to: SimpleTransferFn = ...
- */
-
-// TODO use "denom" or "brand" as the parameter for the currency type
-
-// TODO make it easy to extend /stride.stakeibc.MsgLiquidStake - turadg
-//     so I can do `orch.getChain('stride').makeAccount().liquidStake(amount)`
+export type OsmoSwapFn =
+  (denom: DenomArg,
+    options: Partial<OsmoSwapOptions>,
+    next: TransferMsg | ChainAddress) => TransferMsg;
