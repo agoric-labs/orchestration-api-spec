@@ -2,8 +2,9 @@
 /* global harden */
 import { Fail } from '@agoric/assert';
 import { AmountMath, AmountShape } from '@agoric/ertp';
-import { E, Far } from '@endo/far';
+import { Far } from '@endo/far';
 import { M } from '@endo/patterns';
+import '@agoric/zoe/src/contractFacet/types-ambient.js';
 import { orcUtils } from './utils';
 
 
@@ -16,7 +17,6 @@ export const start = async (zcf, privateArgs) => {
 
   /**
    * @typedef {import('./orchestration').Orchestrator} Orchestrator
-   * @typedef {import('@agoric/zoe').OfferHandler} OfferHandler
    */
 
   /** @type {(any) => { HandlerMaker: import('./orchestration').OrchestrationHandlerMaker}} */
@@ -24,7 +24,7 @@ export const start = async (zcf, privateArgs) => {
 
   const orchestrate = makeOrchestrator({ zone, timerService, zcf, vstorage, orchestratorService });
 
-  /** @type OfferHandler */
+  /** @type {OfferHandler} */
   const unbondAndLiquidStake = orchestrate('LSTTia', { zcf },
     async (/** @type {Orchestrator} */ orch, { zcf }, seat, offerArgs) => {
       const { give } = seat.getProposal();
@@ -49,7 +49,7 @@ export const start = async (zcf, privateArgs) => {
     });
 
   /** deprecated historical example */
-  /** @type OfferHandler */
+  /** @type {OfferHandler} */
   const swapAndStakeHandler = orchestrate('LSTTia', { zcf },
     async (/** @type {Orchestrator} */ orch, { zcf }, seat, offerArgs) => {
       const { give } = seat.getProposal();
