@@ -81,6 +81,7 @@ export type AmountArg = ChainAmount | Amount;
 // chainName: managed like agoricNames. API consumers can make/provide their own
 export interface Orchestrator {
   getChain: (chainName: keyof KnownChains) => Promise<Chain>;
+  makeLocalAccount: () => Promise<LocalChainAccount>;
 
   /**
    * For a denom, return information about a denom including the equivalent
@@ -216,13 +217,28 @@ export interface ChainAccount {
    * @returns acknowledge string
    */
   executeEncodedTx: (msgs: EncodeObject[]) => Promise<string>;
+  /** Close the remote account */
+  close: () => Promise<void>;
+  /* transfer account to new holder */
+  prepareTransfer: () => Promise<Invitation>;
+}
+
+export interface LocalChainAccount {
+  /**
+   * @returns the address of the account on the local chain
+   */
+  getAddress: () => ChainAddress;
+  /**
+   * Submit a transaction on behalf of the local account for execution on the local chain.
+   * @param msgs - records for the transaction
+   * @returns acknowledgement string
+   */
+  executeTx: (msgs: Proto3JSONMsg[]) => Promise<string>;
   /** deposit payment from zoe to the account*/
   deposit: (payment: Payment) => Promise<void>;
   /** get Purse for a brand to .withdraw() a Payment from the account */
   getPurse: (brand: Brand) => Promise<Purse>;
-  /**
-   * Close the remote account
-   */
+  /** Close the local account */
   close: () => Promise<void>;
   /* transfer account to new holder */
   prepareTransfer: () => Promise<Invitation>;
@@ -233,7 +249,7 @@ export interface ChainAccount {
  * packets and react to them. a.k.a. "IBC Hooks"
  */
 
-export interface TransferAccount extends ChainAccount {
+export interface TransferAccount extends LocalChainAccount {
   /**
    * Register a hook to intercept an incoming IBC Transfer.
    * Calling without arguments will unregister the hook
