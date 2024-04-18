@@ -5,16 +5,32 @@ import { Delegation, Redelegation, UnbondingDelegation } from './delegation.js';
 import type { Invitation } from '@agoric/zoe/exported.js';
 import type { Amount, Brand, Payment, Purse } from '@agoric/ertp/exported.js';
 
-/** static declaration of known chain types will allow type support for
+/**
+ * Static declaration of known chain types will allow type support for
  * additional chain-specific operations like `liquidStake`
  */
 export type KnownChains = {
-  stride: ChainInfo;
-  cosmos: ChainInfo;
-  agoric: ChainInfo;
-  celestia: ChainInfo;
-  osmosis: ChainInfo;
-  // ...
+  stride: {
+    info: CosmosChainInfo;
+    methods: {
+      liquidStake: (amount: AmountArg) => Promise<void>;
+    };
+  };
+  cosmos: { info: CosmosChainInfo; methods: {} };
+  agoric: {
+    info: Omit<CosmosChainInfo, 'ibcConnectionInfo'>;
+    methods: {
+      /**
+       * Register a hook to intercept an incoming IBC Transfer and handle it.
+       * Calling without arguments will unregister the hook.
+       */
+      interceptTransfer: (tap?: {
+        upcall: (args: any) => Promise<any>;
+      }) => Promise<void>;
+    };
+  };
+  celestia: { info: CosmosChainInfo; methods: {} };
+  osmosis: { info: CosmosChainInfo; methods: {} };
 };
 
 /** A helper type for type extensions. */
@@ -66,7 +82,11 @@ export declare function makeValidatorAddress(
 
 /** Details for setup will be determined in the implementation. */
 export interface OrchestrationGovernor {
-  registerChain: (chainName: string, info: ChainInfo) => Promise<void>;
+  registerChain: (
+    chainName: string,
+    info: ChainInfo,
+    methods?: Record<string, any>,
+  ) => Promise<void>;
 }
 
 /** Description for an amount of some fungible currency */
@@ -80,21 +100,25 @@ export type AmountArg = ChainAmount | Amount;
 
 // chainName: managed like agoricNames. API consumers can make/provide their own
 export interface Orchestrator {
-  getChain: (chainName: keyof KnownChains) => Promise<Chain>;
-
+  getChain: <C extends keyof KnownChains>(chainName: C) => Promise<Chain<C>>;
   /**
    * For a denom, return information about a denom including the equivalent
    * local Brand, the Chain on which the denom is held, and the Chain that
    * issues the corresponding asset.
    * @param denom
    */
-  getBrandInfo: (denom: Denom) => {
-    /** The well-known Brand on Agoric for the direct asset  */
+  getBrandInfo: <
+    HoldingChain extends keyof KnownChains,
+    IssuingChain extends keyof KnownChains,
+  >(
+    denom: Denom,
+  ) => {
+    /** The well-known Brand on Agoric for the direct asset */
     brand?: Brand;
-    /** The Chain at which the argument `denom` exists  */
-    chain: Chain;
+    /** The Chain at which the argument `denom` exists (where the asset is currently held) */
+    chain: Chain<HoldingChain>;
     /** The Chain that is the issuer of the underlying asset */
-    base: Chain;
+    base: Chain<IssuingChain>;
     /** the Denom for the underlying asset on its issuer chain */
     baseDenom: Denom;
   };
@@ -165,18 +189,15 @@ interface QueryResult {}
  * Note that "remote" can mean the local chain; it's just that
  * accounts are treated as remote/arms length for consistency.
  */
-export interface Chain {
-  getChainInfo: () => Promise<ChainInfo>;
+export interface Chain<C extends keyof KnownChains> {
+  getChainInfo: () => Promise<KnownChains[C]['info']>;
 
   /**
    * Make a new account on the remote chain.
    * @param name - account name for logging and tracing purposes
    * @returns an object that controls a new remote account on Chain
-   *
-   * TODO add Features types so that types reflect additional
-   * operations such as `liquidStake` where appropriate
    */
-  makeAccount: (name?: string) => Promise<OrchestrationAccount>;
+  makeAccount: (name?: string) => Promise<OrchestrationAccount<C>>;
   // FUTURE supply optional port object; also fetch port object
 
   /**
@@ -229,22 +250,9 @@ export interface ChainAccount {
 }
 
 /**
- * A LocalChain account that has the ability to intercept IBC Transfer
- * packets and react to them. a.k.a. "IBC Hooks"
- */
-
-export interface TransferAccount extends ChainAccount {
-  /**
-   * Register a hook to intercept an incoming IBC Transfer.
-   * Calling without arguments will unregister the hook
-   */
-  interceptTransfer: (tap?: { upcall: (args: any) => Promise<any> }) => void;
-}
-
-/**
  * An object that supports high-level operations for an account on a remote chain.
  */
-export interface OrchestrationAccount {
+export interface BaseOrchestrationAccount {
   /** @returns the underlying low-level operation object. */
   getChainAcccount: () => Promise<ChainAccount>;
 
@@ -391,7 +399,15 @@ export interface OrchestrationAccount {
    * @returns void
    */
   transferSteps: (amount: AmountArg, msg: TransferMsg) => Promise<void>;
+  /**
+   * deposit payment from zoe to the account. For remote accounts,
+   * an IBC Transfer will be executed to transfer funds there.
+   */
+  deposit: (payment: Payment) => Promise<void>;
 }
+
+export type OrchestrationAccount<C extends keyof KnownChains> =
+  BaseOrchestrationAccount & KnownChains[C]['methods'];
 
 /**
  * Internal structure for TransferMsgs.

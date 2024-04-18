@@ -67,7 +67,6 @@ export const start = async (zcf, privateArgs) => {
       const celestia = await orch.getChain('celestia');
       const agoric = await orch.getChain('agoric');
 
-      /** @typedef {import('./index').ChainAccount[]} */
       const [celestiaAccount, localAccount] = await Promise.all([
         celestia.makeAccount('main'),
         agoric.makeAccount('main'),
@@ -92,7 +91,7 @@ export const start = async (zcf, privateArgs) => {
       });
 
       await localAccount
-        .transfer(transferMsg)
+        .transferSteps(give.USDC, transferMsg)
         .then((_txResult) =>
           celestiaAccount.delegate(offerArgs.validator, offerArgs.staked),
         )
