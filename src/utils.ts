@@ -1,9 +1,5 @@
-import '@agoric/zoe/exported.js';
-import type { ChainAddress } from './orchestration';
-
-// TODO figure out ERTP requirements
-type Brand = unknown;
-type Amount<T extends 'nat' = 'nat'> = { brand: Brand; value: bigint };
+import type { Amount, Brand } from '@agoric/ertp/exported.js';
+import type { TransferMsg, ChainAddress } from './orchestration';
 
 type AfterAction = { destChain: string; destAddress: ChainAddress };
 type SwapExact = { amountIn: Amount; amountOut: Amount };
@@ -14,22 +10,20 @@ export type OsmosisSwapArgs = (SwapExact | SwapMaxSlippage) &
 export const orcUtils = {
   /**
    * unwinds denom with PFM, if necessary
-   *
-   * @param {Omit<import('./index').TransferMsg, 'memo'>} _args
-   * @returns {import('./index').TransferMsg}
    */
-  makeTransferMsg: (_args) => {
-    // XXX unwind denoms
-    return {};
+  makeTransferMsg: (_args: Omit<TransferMsg, 'memo'>) => {
+    // XXX mocked, so typescript is happy
+    return {
+      toAccount: { chainId: 'osmosis-test', address: 'osmo1234' },
+    } as TransferMsg;
   },
   /**
    * SwapExact or SwapMaxSlippage, with optional AfterAction
-   * @param {import('./index').OsmosisSwapArgs} _args
-   * @returns {import('./index').TransferMsg}
    */
-  makeOsmosisSwap(_args) {
-    // XXX unwind denoms
-    // XXX swap msg
-    return {};
+  makeOsmosisSwap(_args: OsmosisSwapArgs) {
+    // XXX mocked, so typescript is happy
+    return {
+      toAccount: { chainId: 'osmosis-test', address: 'osmo1234' },
+    } as TransferMsg;
   },
 };
