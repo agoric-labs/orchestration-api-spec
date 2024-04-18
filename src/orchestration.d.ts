@@ -229,6 +229,19 @@ export interface ChainAccount {
 }
 
 /**
+ * A LocalChain account that has the ability to intercept IBC Transfer
+ * packets and react to them. a.k.a. "IBC Hooks"
+ */
+
+export interface TransferAccount extends ChainAccount {
+  /**
+   * Register a hook to intercept an incoming IBC Transfer.
+   * Calling without arguments will unregister the hook
+   */
+  interceptTransfer: (tap?: { upcall: (args: any) => Promise<any> }) => void;
+}
+
+/**
  * An object that supports high-level operations for an account on a remote chain.
  */
 export interface OrchestrationAccount {
