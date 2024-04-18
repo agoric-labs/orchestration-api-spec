@@ -39,13 +39,13 @@ export const start = async (zcf, privateArgs) => {
 
       // We would actually alreaady have the account from the orchestrator
       const celestia = await orch.getChain('celestia');
-      const celestiaAccount = await celestia.makeAccount('main');
+      const celestiaAccount = await celestia.makeAccount();
 
       const delegations = await celestiaAccount.getDelegations();
       await celestiaAccount.undelegateAll(delegations);
 
       const stride = await orch.getChain('stride');
-      const strideAccount = await stride.makeAccount('LST');
+      const strideAccount = await stride.makeAccount();
 
       // TODO the `TIA` string actaully needs to be the Brand from AgoricNames
       const tiaAmt = await celestiaAccount.getBalance('TIA');
@@ -68,8 +68,8 @@ export const start = async (zcf, privateArgs) => {
       const agoric = await orch.getChain('agoric');
 
       const [celestiaAccount, localAccount] = await Promise.all([
-        celestia.makeAccount('main'),
-        agoric.makeAccount('main'),
+        celestia.makeAccount(),
+        agoric.makeAccount(),
       ]);
 
       const tiaAddress = await celestiaAccount.getAddress();

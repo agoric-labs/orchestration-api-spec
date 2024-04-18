@@ -194,10 +194,9 @@ export interface Chain<C extends keyof KnownChains> {
 
   /**
    * Make a new account on the remote chain.
-   * @param name - account name for logging and tracing purposes
    * @returns an object that controls a new remote account on Chain
    */
-  makeAccount: (name?: string) => Promise<OrchestrationAccount<C>>;
+  makeAccount: () => Promise<OrchestrationAccount<C>>;
   // FUTURE supply optional port object; also fetch port object
 
   /**
